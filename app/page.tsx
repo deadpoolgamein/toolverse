@@ -61,6 +61,10 @@ export default function Home() {
     name: "JPG to PNG",
     link: "/tools/jpg-to-png",
   },
+  {
+    name: "PNG to JPG",
+    link: "/tools/png-to-jpg",
+  },
   ];
   const calculators = [
   "Age Calculator",
@@ -79,8 +83,14 @@ const utilityTools = [
   "QR Generator",
   "Character Counter",
   "Text Case Converter",
-  "Image Resizer",
   
+  
+];
+
+const imageTools = [
+  "Image Resizer",
+  "JPG to PNG",
+  "PNG to JPG",
 ];
 
   return (
@@ -168,6 +178,29 @@ const utilityTools = [
   <div className="grid md:grid-cols-3 gap-6">
     {tools
       .filter((tool) => utilityTools.includes(tool.name))
+      .map((tool) => (
+        <a
+          key={tool.name}
+          href={tool.link}
+          className="bg-white border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg hover:border-blue-500 transition block"
+        >
+          <h3 className="text-lg font-semibold text-gray-900">
+            {tool.name}
+          </h3>
+        </a>
+      ))}
+  </div>
+</section>
+
+{/* Image Tools */}
+<section className="max-w-6xl mx-auto px-6 pb-20">
+  <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">
+    Image Tools
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-6">
+    {tools
+      .filter((tool) => imageTools.includes(tool.name))
       .map((tool) => (
         <a
           key={tool.name}
