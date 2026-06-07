@@ -1,3 +1,4 @@
+import Image from "next/image";
 export default function Home() {
   const tools = [
     {
@@ -57,9 +58,18 @@ const utilityTools = [
       {/* Navbar */}
       <nav className="border-b bg-white">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">
-            ToolVerse
-          </h1>
+          <div className="flex items-center gap-1">
+            <Image
+              src="/logo.png"
+              alt="ToolVerse Logo"
+              width={80}
+              height={80}
+            />
+
+            <h1 className="text-2xl font-bold text-blue-600">
+              ToolVerse
+            </h1>
+          </div>
 
           <div className="flex gap-6">
             <a href="/" className="hover:text-blue-600">
