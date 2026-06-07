@@ -37,6 +37,26 @@ export default function Home() {
     name: "Discount Calculator",
     link: "/tools/discount-calculator",
   },
+  {
+    name: "SIP Calculator",
+    link: "/tools/sip-calculator",
+  },
+  {
+    name: "Loan Calculator",
+    link: "/tools/loan-calculator",
+  },
+  {
+    name: "Character Counter",
+    link: "/tools/character-counter",
+  },
+  {
+    name: "Text Case Converter",
+    link: "/tools/text-case-converter",
+  },
+  {
+    name: "Image Resizer",
+    link: "/tools/image-resizer",
+  },
   ];
   const calculators = [
   "Age Calculator",
@@ -45,12 +65,17 @@ export default function Home() {
   "BMI Calculator",
   "EMI Calculator",
   "Discount Calculator",
+  "SIP Calculator",
+  "Loan Calculator",
 ];
 
 const utilityTools = [
   "Word Counter",
   "Password Generator",
   "QR Generator",
+  "Character Counter",
+  "Text Case Converter",
+  "Image Resizer",
 ];
 
   return (
