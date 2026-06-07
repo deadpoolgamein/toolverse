@@ -6,23 +6,35 @@ export default function Home() {
   },
   {
     name: "GST Calculator",
-    link: "#",
+    link: "/tools/gst-calculator",
+  },
+  {
+    name: "Percentage Calculator",
+    link: "/tools/percentage-calculator",
+  },
+  {
+    name: "BMI Calculator",
+    link: "/tools/bmi-calculator",
   },
   {
     name: "EMI Calculator",
-    link: "#",
+    link: "/tools/emi-calculator",
   },
   {
     name: "QR Generator",
-    link: "#",
+    link: "/tools/qr-generator",
   },
   {
     name: "Word Counter",
-    link: "#",
+    link: "/tools/word-counter",
   },
   {
     name: "Password Generator",
-    link: "#",
+    link: "/tools/password-generator",
+  },
+  {
+    name: "Discount Calculator",
+    link: "/tools/discount-calculator",
   },
   ];
 
