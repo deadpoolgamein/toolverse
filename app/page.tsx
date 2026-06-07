@@ -65,6 +65,10 @@ export default function Home() {
     name: "PNG to JPG",
     link: "/tools/png-to-jpg",
   },
+  {
+    name: "Image Compressor",
+    link: "/tools/image-compressor",
+  },
   ];
   const calculators = [
   "Age Calculator",
@@ -91,6 +95,7 @@ const imageTools = [
   "Image Resizer",
   "JPG to PNG",
   "PNG to JPG",
+  "Image Compressor",
 ];
 
   return (
