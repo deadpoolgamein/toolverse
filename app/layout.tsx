@@ -12,10 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "ToolVerse - Free Online Tools",
   description:
     "Free online calculators and utility tools including Age Calculator, GST Calculator, EMI Calculator, QR Generator and more.",
+
+  verification: {
+    google: "XS0bHzyuQExu7uDOKfm0hHmcANx4J-Owc_dGP3kpHa8",
+  },
 };
 
 export default function RootLayout({
