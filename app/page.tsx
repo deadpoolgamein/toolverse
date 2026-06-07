@@ -57,6 +57,10 @@ export default function Home() {
     name: "Image Resizer",
     link: "/tools/image-resizer",
   },
+  {
+    name: "JPG to PNG",
+    link: "/tools/jpg-to-png",
+  },
   ];
   const calculators = [
   "Age Calculator",
@@ -76,6 +80,7 @@ const utilityTools = [
   "Character Counter",
   "Text Case Converter",
   "Image Resizer",
+  
 ];
 
   return (
