@@ -102,13 +102,13 @@ const imageTools = [
     <main className="min-h-screen bg-white">
       {/* Navbar */}
       <nav className="border-b bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-1">
             <Image
               src="/logo.png"
               alt="ToolVerse Logo"
-              width={80}
-              height={80}
+              width={50}
+              height={50}
             />
 
             <h1 className="text-2xl font-bold text-blue-600">
@@ -116,7 +116,7 @@ const imageTools = [
             </h1>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base">
             <a href="/" className="hover:text-blue-600">
               Home
             </a>
