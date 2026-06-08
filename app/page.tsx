@@ -73,6 +73,18 @@ export default function Home() {
     name: "Image Compressor",
     link: "/tools/image-compressor",
   },
+  {
+    name: "Currency Converter",
+    link: "/tools/currency-converter",
+  },
+  {
+    name: "Unit Converter",
+    link: "/tools/unit-converter"
+  },
+  {
+    name: "Image Cropper",
+    link: "/tools/image-cropper",
+  },
   ];
   const featuredTools = [
   "Age Calculator",
@@ -91,6 +103,8 @@ export default function Home() {
   "Discount Calculator",
   "SIP Calculator",
   "Loan Calculator",
+  "Currency Converter",
+  "Unit Converter",
 ];
 
 const utilityTools = [
@@ -108,6 +122,7 @@ const imageTools = [
   "JPG to PNG",
   "PNG to JPG",
   "Image Compressor",
+  "Image Cropper"
 ];
 
   return (
