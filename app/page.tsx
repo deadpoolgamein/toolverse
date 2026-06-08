@@ -74,6 +74,14 @@ export default function Home() {
     link: "/tools/image-compressor",
   },
   ];
+  const featuredTools = [
+  "Age Calculator",
+  "SIP Calculator",
+  "Image Compressor",
+];
+
+
+  const totalTools = tools.length;
   const calculators = [
   "Age Calculator",
   "GST Calculator",
@@ -143,11 +151,15 @@ const imageTools = [
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 py-24 text-center">
         <h1 className="text-6xl font-bold text-gray-900 mb-6">
-          100+ Free Online Tools
+          {totalTools}+ Free Online Tools
         </h1>
 
         <p className="text-xl text-gray-600 mb-10">
           Fast, Free and Easy-to-Use Tools for Everyone.
+        </p>
+
+        <p className="text-blue-600 font-semibold mb-8">
+          {totalTools} Tools Available
         </p>
 
         <div className="max-w-md mx-auto mb-10 relative">
@@ -180,6 +192,76 @@ const imageTools = [
         </div>
 
       </section>
+
+
+      {/* Stats Bar */}
+      <section className="max-w-6xl mx-auto px-6 pb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+          <div className="bg-blue-50 p-6 rounded-2xl text-center">
+            <h3 className="text-2xl font-bold text-blue-600">
+              {totalTools}
+            </h3>
+            <p className="text-gray-700">
+              Tools
+            </p>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-2xl text-center">
+            <h3 className="text-2xl font-bold text-blue-600">
+              100%
+            </h3>
+            <p className="text-gray-700">
+              Free
+            </p>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-2xl text-center">
+            <h3 className="text-2xl font-bold text-blue-600">
+              📱
+            </h3>
+            <p className="text-gray-700">
+              Mobile Friendly
+            </p>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-2xl text-center">
+            <h3 className="text-2xl font-bold text-blue-600">
+              🔒
+            </h3>
+            <p className="text-gray-700">
+              No Signup
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* Featured Tools */}
+      <section className="max-w-6xl mx-auto px-6 pb-16">
+        <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">
+          🔥 Most Popular Tools
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-6">
+           {tools
+             .filter((tool) =>
+               featuredTools.includes(tool.name)
+             )
+             .map((tool) => (
+               <a
+                 key={tool.name}
+                 href={tool.link}
+                 className="bg-blue-50 border border-blue-200 rounded-2xl p-8 text-center shadow-sm hover:shadow-lg hover:border-blue-500 transition block"
+               >
+                 <h3 className="text-lg font-semibold text-gray-900">
+                   {tool.name}
+                 </h3>
+               </a>
+             ))}
+         </div>
+       </section>
 
       {/* Calculators */}
 <section className="max-w-6xl mx-auto px-6 pb-10">
