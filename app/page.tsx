@@ -143,7 +143,7 @@ const imageTools = [
             </h1>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base">
+          <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-gray-700">
             <a href="/blog" className="hover:text-blue-600">
               Blog
             </a>
