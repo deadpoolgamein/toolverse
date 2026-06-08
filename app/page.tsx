@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 export default function Home() {
+  const [search, setSearch] = useState("");
   const tools = [
+    
     {
     name: "Age Calculator",
     link: "/tools/age-calculator",
@@ -146,9 +150,35 @@ const imageTools = [
           Fast, Free and Easy-to-Use Tools for Everyone.
         </p>
 
-        <button className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition">
-          Explore Tools
-        </button>
+        <div className="max-w-md mx-auto mb-10 relative">
+          <input
+            type="text"
+            placeholder="🔍 Search tools..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-black"
+          />
+
+          {search && (
+            <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
+              {tools
+                .filter((tool) =>
+                  tool.name.toLowerCase().includes(search.toLowerCase())
+                )
+                .slice(0, 8)
+                .map((tool) => (
+                  <a
+                    key={tool.name}
+                    href={tool.link}
+                    className="block px-4 py-3 cursor-pointer hover:bg-blue-100 hover:text-blue-700 transition text-black border-b border-gray-200 last:border-b-0"
+                  >
+                    {tool.name}
+                  </a>
+                ))}
+            </div>
+          )}
+        </div>
+
       </section>
 
       {/* Calculators */}
@@ -159,7 +189,11 @@ const imageTools = [
 
   <div className="grid md:grid-cols-3 gap-6">
     {tools
-      .filter((tool) => calculators.includes(tool.name))
+      .filter(
+        (tool) =>
+          calculators.includes(tool.name) &&
+          tool.name.toLowerCase().includes(search.toLowerCase())
+      )
       .map((tool) => (
         <a
           key={tool.name}
@@ -182,7 +216,11 @@ const imageTools = [
 
   <div className="grid md:grid-cols-3 gap-6">
     {tools
-      .filter((tool) => utilityTools.includes(tool.name))
+      .filter(
+        (tool) =>
+          utilityTools.includes(tool.name) &&
+          tool.name.toLowerCase().includes(search.toLowerCase())
+      )
       .map((tool) => (
         <a
           key={tool.name}
@@ -205,7 +243,11 @@ const imageTools = [
 
   <div className="grid md:grid-cols-3 gap-6">
     {tools
-      .filter((tool) => imageTools.includes(tool.name))
+      .filter(
+        (tool) =>
+          imageTools.includes(tool.name) &&
+          tool.name.toLowerCase().includes(search.toLowerCase())
+      )
       .map((tool) => (
         <a
           key={tool.name}
@@ -219,6 +261,7 @@ const imageTools = [
       ))}
   </div>
 </section>
+
 
       {/* Footer */}
       <footer className="bg-blue-600 text-white mt-20">
