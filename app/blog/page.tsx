@@ -23,9 +23,9 @@ export default function BlogPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6">
+    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-red-800 py-12 px-6 p-6">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-10 text-black">
+        <h1 className="text-4xl font-bold text-center mb-10 text-white">
           DRAKSYON Blog
         </h1>
 
@@ -34,18 +34,18 @@ export default function BlogPage() {
             <a
               key={post.title}
               href={post.link}
-              className="bg-white rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition block border"
+              className="bg-[#111111] rounded-2xl p-6 border border-red-900 shadow-lg hover:shadow-red-900/30 hover:border-red-700 transition block hover:-translate-y-1 transition block border"
             >
               <div>
-                <h2 className="text-xl font-semibold text-black mb-3">
+                <h2 className="text-xl font-semibold text-white mb-3">
                   {post.title}
                 </h2>
 
-                <p className="text-gray-600 mb-4">
+                <p className="text-white mb-4">
                   {post.description}
                 </p>
 
-                <span className="text-blue-600 font-semibold">
+                <span className="text-red-500 font-semibold">
                   Read Article →
                 </span>
               </div>
