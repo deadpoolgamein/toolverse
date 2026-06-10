@@ -56,7 +56,7 @@ export default function SIPvsLumpsumArticle() {
           </h2>
 
           <p className="text-gray-700 mb-4">
-            Use the ToolVerse SIP Calculator to estimate
+            Use the DRAKSYON SIP Calculator to estimate
             your future investment value and plan your
             financial goals more effectively.
           </p>

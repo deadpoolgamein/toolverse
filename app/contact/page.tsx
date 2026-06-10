@@ -12,7 +12,7 @@ export default function ContactPage() {
         </p>
 
         <p className="mb-4">
-          Email: toolverse.support@gmail.com
+          Email: draksyon.support@gmail.com
         </p>
 
         <p className="mb-4">
@@ -20,7 +20,7 @@ export default function ContactPage() {
         </p>
 
         <p>
-          Thank you for using ToolVerse.
+          Thank you for using DRAKSYON.
         </p>
       </div>
     </main>

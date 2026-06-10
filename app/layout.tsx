@@ -13,16 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "ToolVerse - Free Online Tools",
+  title: "DRAKSYON - Gaming, AI, Tools & Blogs",
   description:
-    "Free online calculators and utility tools including Age Calculator, GST Calculator, EMI Calculator, QR Generator and more.",
+    "DRAKSYON is an all-in-one platform for Gaming, AI, Tools, Blogs and digital resources.",
 
   verification: {
     google: "XS0bHzyuQExu7uDOKfm0hHmcANx4J-Owc_dGP3kpHa8",
   },
 };
 
-export default function RootLayout({
+export default function RootLayout({ 
   children,
 }: Readonly<{
   children: React.ReactNode;

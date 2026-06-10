@@ -7,7 +7,7 @@ export default function TermsPage() {
         </h1>
 
         <p className="mb-4">
-          By using ToolVerse, you agree to these Terms and Conditions.
+          By using DRAKSYON, you agree to these Terms and Conditions.
         </p>
 
         <h2 className="text-2xl font-semibold mt-6 mb-3">
@@ -15,7 +15,7 @@ export default function TermsPage() {
         </h2>
 
         <p className="mb-4">
-          All tools and services provided on ToolVerse are offered for
+          All tools and services provided on DRAKSYON are offered for
           informational and general use purposes only.
         </p>
 
@@ -33,7 +33,7 @@ export default function TermsPage() {
         </h2>
 
         <p className="mb-4">
-          ToolVerse shall not be held responsible for any loss or damages
+          DRAKSYON shall not be held responsible for any loss or damages
           resulting from the use of our website or tools.
         </p>
 
@@ -45,7 +45,7 @@ export default function TermsPage() {
           For any questions regarding these Terms & Conditions,
           please contact:
           <br />
-          toolverse.support@gmail.com
+          draksyon.support@gmail.com
         </p>
       </div>
     </main>

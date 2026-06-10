@@ -30,7 +30,7 @@ export default function CompressImageArticle() {
         </p>
 
         <p className="text-gray-700 mb-4">
-          ToolVerse Image Compressor allows users to compress
+          DRAKSYON Image Compressor allows users to compress
           images quickly and download the optimized file
           directly in their browser.
         </p>

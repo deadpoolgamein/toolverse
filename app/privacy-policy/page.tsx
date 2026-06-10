@@ -7,7 +7,7 @@ export default function PrivacyPolicyPage() {
         </h1>
 
         <p className="mb-4">
-          At ToolVerse, we value your privacy and are committed to
+          At DRAKSYON, we value your privacy and are committed to
           protecting your personal information.
         </p>
 
@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
           If you have any questions regarding this Privacy Policy,
           please contact us at:
           <br />
-          toolverse.support@gmail.com
+          draksyon.support@gmail.com
         </p>
       </div>
     </main>

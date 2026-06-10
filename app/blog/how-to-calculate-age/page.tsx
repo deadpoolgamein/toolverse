@@ -18,7 +18,7 @@ export default function AgeArticle() {
         </p>
 
         <p className="text-gray-700">
-          ToolVerse Age Calculator helps users calculate
+          DRAKSYON Age Calculator helps users calculate
           their age quickly and easily.
         </p>
 

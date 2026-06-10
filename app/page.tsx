@@ -126,41 +126,36 @@ const imageTools = [
 ];
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-red-800">
       {/* Navbar */}
       <nav className="border-b bg-white">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-1">
-            <Image
-              src="/logo.png"
-              alt="ToolVerse Logo"
-              width={50}
-              height={50}
-            />
+            
 
-            <h1 className="text-2xl font-bold text-blue-600">
-              ToolVerse
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+              DRAKSYON
             </h1>
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-gray-700">
-            <a href="/blog" className="hover:text-blue-600">
+            <a href="/blog" className="hover:text-red-600">
               Blog
             </a>
             
-            <a href="/" className="hover:text-blue-600">
+            <a href="/" className="hover:text-red-600">
               Home
             </a>
 
-            <a href="/about" className="hover:text-blue-600">
+            <a href="/about" className="hover:text-red-600">
               About
             </a>
 
-            <a href="/contact" className="hover:text-blue-600">
+            <a href="/contact" className="hover:text-red-600">
               Contact
             </a>
 
-            <a href="/privacy-policy" className="hover:text-blue-600">
+            <a href="/privacy-policy" className="hover:text-red-600">
               Privacy
             </a>
           </div>
@@ -168,30 +163,35 @@ const imageTools = [
       </nav>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 py-24 text-center">
-        <h1 className="text-6xl font-bold text-gray-900 mb-6">
-          {totalTools}+ Free Online Tools
+      <section className="bg-gradient-to-br from-black via-zinc-900 to-red-950 text-white text-center py-20 px-6">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+          <img
+            src="/logo.png"
+            alt="DRAKSYON Logo"
+            className="w-40 md:w-56 mx-auto mb-6"
+          />
+          DRAKSYON
         </h1>
 
-        <p className="text-xl text-gray-600 mb-10">
-          Fast, Free and Easy-to-Use Tools for Everyone.
+        <p className="text-xl text-gray-300 mb-6">
+          Gaming • AI • Tools • Blogs
         </p>
 
-        <p className="text-blue-600 font-semibold mb-8">
-          {totalTools} Tools Available
+        <p className="text-red-500 font-semibold mb-8">
+          {totalTools}+ Digital Resources Available
         </p>
 
         <div className="max-w-md mx-auto mb-10 relative">
           <input
             type="text"
-            placeholder="🔍 Search tools..."
+            placeholder="🔍 Search games, tools, AI & blogs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-black"
+            className="w-full border border-red-800 bg-zinc-900 text-white rounded-xl px-4 py-3"
           />
 
           {search && (
-            <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
+            <div className="absolute left-0 right-0 top-full mt-2 bg-zinc-900 border border-red-900 rounded-xl shadow-xl z-50 overflow-hidden">
               {tools
                 .filter((tool) =>
                   tool.name.toLowerCase().includes(search.toLowerCase())
@@ -201,7 +201,7 @@ const imageTools = [
                   <a
                     key={tool.name}
                     href={tool.link}
-                    className="block px-4 py-3 cursor-pointer hover:bg-blue-100 hover:text-blue-700 transition text-black border-b border-gray-200 last:border-b-0"
+                    className="block px-4 py-3 cursor-pointer hover:bg-red-900 hover:text-red-300 transition text-gray-200 border-b border-gray-200 last:border-b-0"
                   >
                     {tool.name}
                   </a>
@@ -214,41 +214,41 @@ const imageTools = [
 
 
       {/* Stats Bar */}
-      <section className="max-w-6xl mx-auto px-6 pb-12">
+      <section className="max-w-6xl mx-auto px-6 pt-16 pb-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-          <div className="bg-blue-50 p-6 rounded-2xl text-center">
-            <h3 className="text-2xl font-bold text-blue-600">
+          <div className="bg-[#111111] text-white border border-red-900 p-6 rounded-3xl text-center">
+            <h3 className="text-2xl font-bold text-white">
               {totalTools}
             </h3>
-            <p className="text-gray-700">
+            <p className="text-white">
               Tools
             </p>
           </div>
 
-          <div className="bg-blue-50 p-6 rounded-2xl text-center">
-            <h3 className="text-2xl font-bold text-blue-600">
+          <div className="bg-[#111111] text-white border border-red-900 p-6 rounded-3xl text-center">
+            <h3 className="text-2xl font-bold text-white">
               100%
             </h3>
-            <p className="text-gray-700">
+            <p className="text-white">
               Free
             </p>
           </div>
 
-          <div className="bg-blue-50 p-6 rounded-2xl text-center">
-            <h3 className="text-2xl font-bold text-blue-600">
+          <div className="bg-[#111111] text-white border border-red-900 p-6 rounded-3xl text-center">
+            <h3 className="text-2xl font-bold text-white">
               📱
             </h3>
-            <p className="text-gray-700">
+            <p className="text-white">
               Mobile Friendly
             </p>
           </div>
 
-          <div className="bg-blue-50 p-6 rounded-2xl text-center">
-            <h3 className="text-2xl font-bold text-blue-600">
+          <div className="bg-[#111111] text-white border border-red-900 p-6 rounded-3xl text-center">
+            <h3 className="text-2xl font-bold text-white">
               🔒
             </h3>
-            <p className="text-gray-700">
+            <p className="text-white">
               No Signup
             </p>
           </div>
@@ -258,8 +258,8 @@ const imageTools = [
 
 
       {/* Featured Tools */}
-      <section className="max-w-6xl mx-auto px-6 pb-16">
-        <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">
+      <section className="max-w-6x1 mx-auto px-6 pb-10 pt-8 bg-zinc-1000  rounded-3xl">
+        <h2 className="text-4xl font-bold text-center mb-10 text-white">
           🔥 Most Popular Tools
         </h2>
 
@@ -272,9 +272,9 @@ const imageTools = [
                <a
                  key={tool.name}
                  href={tool.link}
-                 className="bg-blue-50 border border-blue-200 rounded-2xl p-8 text-center shadow-sm hover:shadow-lg hover:border-blue-500 transition block"
+                 className="bg-[#111111] text-white border border-red-900 rounded-3xl p-8 text-center shadow-sm hover:shadow-lg hover:border-red-700 transition block"
                >
-                 <h3 className="text-lg font-semibold text-gray-900">
+                 <h3 className="text-lg font-semibold text-white">
                    {tool.name}
                  </h3>
                </a>
@@ -283,8 +283,8 @@ const imageTools = [
        </section>
 
       {/* Calculators */}
-<section className="max-w-6xl mx-auto px-6 pb-10">
-  <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">
+<section className="max-w-6xl mx-auto px-6 pt-16 pb-10">
+  <h2 className="text-3xl font-bold text-center mb-10 text-white">
     Calculators
   </h2>
 
@@ -299,9 +299,9 @@ const imageTools = [
         <a
           key={tool.name}
           href={tool.link}
-          className="bg-white border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg hover:border-blue-500 transition block"
+          className="bg-[#111111] text-white border border-red-900 rounded-2xl p-8 text-center shadow-lg hover:shadow-red-900/30 hover:border-red-700 transition block"
         >
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-semibold text-white">
             {tool.name}
           </h3>
         </a>
@@ -311,7 +311,7 @@ const imageTools = [
 
 {/* Utility Tools */}
 <section className="max-w-6xl mx-auto px-6 pb-20">
-  <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">
+  <h2 className="text-3xl font-bold text-center mb-10 text-white">
     Utility Tools
   </h2>
 
@@ -326,9 +326,9 @@ const imageTools = [
         <a
           key={tool.name}
           href={tool.link}
-          className="bg-white border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg hover:border-blue-500 transition block"
+          className="bg-[#111111] text-white border border-red-900 rounded-3xl p-8 text-center shadow-lg hover:shadow-red-900/30 hover:border-red-700 transition block"
         >
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-semibold text-white">
             {tool.name}
           </h3>
         </a>
@@ -338,7 +338,7 @@ const imageTools = [
 
 {/* Image Tools */}
 <section className="max-w-6xl mx-auto px-6 pb-20">
-  <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">
+  <h2 className="text-3xl font-bold text-center mb-10 text-white">
     Image Tools
   </h2>
 
@@ -353,9 +353,9 @@ const imageTools = [
         <a
           key={tool.name}
           href={tool.link}
-          className="bg-white border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg hover:border-blue-500 transition block"
+          className="bg-[#111111] text-white border border-red-900 rounded-3xl p-8 text-center shadow-lg hover:shadow-red-900/30 hover:border-red-700 transition block"
         >
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-semibold text-white">
             {tool.name}
           </h3>
         </a>
@@ -365,13 +365,13 @@ const imageTools = [
 
 
       {/* Footer */}
-      <footer className="bg-blue-600 text-white mt-20">
+      <footer className="bg-gradient-to-br from-black via-zinc-900 to-red-950 text-white text-center py-20 px-6">
   <div className="max-w-7xl mx-auto px-6 py-10">
     <div className="grid md:grid-cols-3 gap-8">
 
       <div>
         <h3 className="font-bold text-xl mb-3">
-          ToolVerse
+          DRAKSYON
         </h3>
 
         <p>
@@ -398,14 +398,14 @@ const imageTools = [
         </h3>
 
         <p>
-          toolverse.support@gmail.com
+          draksyon.support@gmail.com
         </p>
       </div>
 
     </div>
 
-    <div className="border-t border-blue-400 mt-8 pt-4 text-center">
-      © 2026 ToolVerse. All Rights Reserved.
+    <div className="border-t border-red-500 mt-8 pt-4 text-center">
+      © 2026 DRAKSYON. All Rights Reserved.
     </div>
   </div>
 </footer>

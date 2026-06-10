@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = "https://toolverse-jet.vercel.app";
+  const baseUrl = "https://draksyon.vercel.app";
 
   return [
     {

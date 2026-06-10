@@ -19,7 +19,7 @@ export default function GSTArticle() {
         </p>
 
         <p className="text-gray-700">
-          You can use ToolVerse GST Calculator to calculate
+          You can use DRAKSYON GST Calculator to calculate
           GST instantly without any manual calculations.
         </p>
 
