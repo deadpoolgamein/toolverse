@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -25,6 +26,8 @@ export default function Home() {
     { name: "Currency Converter", link: "/tools/currency-converter" },
     { name: "Unit Converter", link: "/tools/unit-converter" },
     { name: "Image Cropper", link: "/tools/image-cropper" },
+    { name: "AI Tweet Generator", link: "/tools/ai-tweet-generator" },
+    { name: "AI SEO Meta Writer", link: "/tools/ai-seo-description" },
   ];
 
   const featuredTools = ["Age Calculator", "SIP Calculator", "Image Compressor"];
@@ -168,6 +171,83 @@ export default function Home() {
             ))}
         </div>
       </section>
+
+      
+      {/* --- AI TOOLS --- */}
+<section className="max-w-6xl mx-auto px-6 py-12">
+  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">
+    <span className="w-1 h-5 bg-red-500 rounded-full"></span>
+    🤖 AI Tools
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    {/* AI Tweet Generator */}
+    <Link
+      href="/tools/ai-tweet-generator"
+      className="group bg-zinc-900/30 border border-zinc-900 hover:border-red-500/40 rounded-2xl p-5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between hover:-translate-y-1 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+    >
+      <div className="absolute -right-10 -top-10 w-24 h-24 bg-red-500/10 rounded-full blur-xl group-hover:bg-red-500/20 transition-all" />
+
+      <div>
+        <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 mb-4">
+          🚀
+        </div>
+
+        <div className="flex items-center gap-2">
+          <h3 className="font-bold text-zinc-100 group-hover:text-red-500 transition-colors">
+            AI Tweet Generator
+          </h3>
+
+          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 font-bold uppercase">
+            AI Free
+          </span>
+        </div>
+
+        <p className="text-zinc-500 text-xs mt-2">
+          Generate viral Twitter/X posts and threads instantly.
+        </p>
+      </div>
+
+      <div className="text-[10px] font-mono text-zinc-600 mt-4">
+        Launch AI Model →
+      </div>
+    </Link>
+
+    {/* AI SEO META WRITER */}
+    <Link
+      href="/tools/ai-seo-description"
+      className="group bg-zinc-900/30 border border-zinc-900 hover:border-red-500/40 rounded-2xl p-5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between hover:-translate-y-1 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+    >
+      <div className="absolute -right-10 -top-10 w-24 h-24 bg-red-500/10 rounded-full blur-xl group-hover:bg-red-500/20 transition-all" />
+
+      <div>
+        <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 mb-4">
+          🔍
+        </div>
+
+        <div className="flex items-center gap-2">
+          <h3 className="font-bold text-zinc-100 group-hover:text-red-500 transition-colors">
+            AI SEO Meta Writer
+          </h3>
+
+          <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 font-bold uppercase">
+            AI Free
+          </span>
+        </div>
+
+        <p className="text-zinc-500 text-xs mt-2">
+          Create SEO-friendly meta descriptions with one click.
+        </p>
+      </div>
+
+      <div className="text-[10px] font-mono text-zinc-600 mt-4">
+        Launch AI Model →
+      </div>
+    </Link>
+
+  </div>
+</section>
 
       {/* --- CALCULATORS --- */}
       <section className="max-w-6xl mx-auto px-6 py-12">
