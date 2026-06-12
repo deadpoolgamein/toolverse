@@ -1,54 +1,34 @@
-export default function PrivacyPolicyPage() {
+"use client";
+
+export default function PrivacyPolicy() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-red-800 py-12 px-6">
-      <div className="max-w-4xl mx-auto bg-[#111111] text-white border border-red-900 rounded-2xl shadow-lg p-8">
-        <h1 className="text-4xl font-bold mb-6">
-          Privacy Policy
-        </h1>
+    <main className="min-h-screen bg-zinc-950 text-white font-sans pt-20">
+      <div className="max-w-3xl mx-auto px-6 py-16">
+        <h1 className="text-3xl font-black mb-2">Privacy <span className="text-red-500">Policy</span></h1>
+        <p className="text-xs font-mono text-zinc-500 mb-10 uppercase tracking-widest">// Last Updated: June 2026</p>
 
-        <p className="mb-4">
-          At DRAKSYON, we value your privacy and are committed to
-          protecting your personal information.
-        </p>
+        <div className="space-y-8 text-zinc-400 text-sm leading-relaxed">
+          <section>
+            <h2 className="text-lg font-bold text-zinc-200 mb-3">1. Information We Collect</h2>
+            <p>
+              Darksyon provides web utilities and calculation tools. We do not require users to create accounts for generic usage, and we do not store any inputs you enter into our standard conversion or calculation tools. All computations are handled securely via your local browser environment.
+            </p>
+          </section>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-3">
-          Information We Collect
-        </h2>
+          <section>
+            <h2 className="text-lg font-bold text-zinc-200 mb-3">2. Cookies and Analytics</h2>
+            <p>
+              We may utilize minimal, privacy-compliant cookies or analytical tracking solutions to better understand site traffic patterns, loading optimization errors, and general mobile performance analytics to polish UI features over time.
+            </p>
+          </section>
 
-        <p className="mb-4">
-          We may collect non-personal information such as browser type,
-          device information, and usage statistics to improve our services.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-6 mb-3">
-          Cookies
-        </h2>
-
-        <p className="mb-4">
-          Our website may use cookies to enhance user experience and
-          analyze website traffic.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-6 mb-3">
-          Third-Party Services
-        </h2>
-
-        <p className="mb-4">
-          We may use third-party services such as analytics providers
-          and advertising partners that may collect information according
-          to their own privacy policies.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-6 mb-3">
-          Contact
-        </h2>
-
-        <p>
-          If you have any questions regarding this Privacy Policy,
-          please contact us at:
-          <br />
-          draksyon.support@gmail.com
-        </p>
+          <section>
+            <h2 className="text-lg font-bold text-zinc-200 mb-3">3. Contact Information</h2>
+            <p>
+              For any questions regarding safety specifications, data privacy concerns, or legal inquiries, reach out directly via our corporate email support matrix: <span className="text-red-400">draksyon.support@gmail.com</span>.
+            </p>
+          </section>
+        </div>
       </div>
     </main>
   );

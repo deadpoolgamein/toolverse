@@ -1,414 +1,272 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+
 export default function Home() {
   const [search, setSearch] = useState("");
   const tools = [
-    
-    {
-    name: "Age Calculator",
-    link: "/tools/age-calculator",
-  },
-  {
-    name: "GST Calculator",
-    link: "/tools/gst-calculator",
-  },
-  {
-    name: "Percentage Calculator",
-    link: "/tools/percentage-calculator",
-  },
-  {
-    name: "BMI Calculator",
-    link: "/tools/bmi-calculator",
-  },
-  {
-    name: "EMI Calculator",
-    link: "/tools/emi-calculator",
-  },
-  {
-    name: "QR Generator",
-    link: "/tools/qr-generator",
-  },
-  {
-    name: "Word Counter",
-    link: "/tools/word-counter",
-  },
-  {
-    name: "Password Generator",
-    link: "/tools/password-generator",
-  },
-  {
-    name: "Discount Calculator",
-    link: "/tools/discount-calculator",
-  },
-  {
-    name: "SIP Calculator",
-    link: "/tools/sip-calculator",
-  },
-  {
-    name: "Loan Calculator",
-    link: "/tools/loan-calculator",
-  },
-  {
-    name: "Character Counter",
-    link: "/tools/character-counter",
-  },
-  {
-    name: "Text Case Converter",
-    link: "/tools/text-case-converter",
-  },
-  {
-    name: "Image Resizer",
-    link: "/tools/image-resizer",
-  },
-  {
-    name: "JPG to PNG",
-    link: "/tools/jpg-to-png",
-  },
-  {
-    name: "PNG to JPG",
-    link: "/tools/png-to-jpg",
-  },
-  {
-    name: "Image Compressor",
-    link: "/tools/image-compressor",
-  },
-  {
-    name: "Currency Converter",
-    link: "/tools/currency-converter",
-  },
-  {
-    name: "Unit Converter",
-    link: "/tools/unit-converter"
-  },
-  {
-    name: "Image Cropper",
-    link: "/tools/image-cropper",
-  },
+    { name: "Age Calculator", link: "/tools/age-calculator" },
+    { name: "GST Calculator", link: "/tools/gst-calculator" },
+    { name: "Percentage Calculator", link: "/tools/percentage-calculator" },
+    { name: "BMI Calculator", link: "/tools/bmi-calculator" },
+    { name: "EMI Calculator", link: "/tools/emi-calculator" },
+    { name: "QR Generator", link: "/tools/qr-generator" },
+    { name: "Word Counter", link: "/tools/word-counter" },
+    { name: "Password Generator", link: "/tools/password-generator" },
+    { name: "Discount Calculator", link: "/tools/discount-calculator" },
+    { name: "SIP Calculator", link: "/tools/sip-calculator" },
+    { name: "Loan Calculator", link: "/tools/loan-calculator" },
+    { name: "Character Counter", link: "/tools/character-counter" },
+    { name: "Text Case Converter", link: "/tools/text-case-converter" },
+    { name: "Image Resizer", link: "/tools/image-resizer" },
+    { name: "JPG to PNG", link: "/tools/jpg-to-png" },
+    { name: "PNG to JPG", link: "/tools/png-to-jpg" },
+    { name: "Image Compressor", link: "/tools/image-compressor" },
+    { name: "Currency Converter", link: "/tools/currency-converter" },
+    { name: "Unit Converter", link: "/tools/unit-converter" },
+    { name: "Image Cropper", link: "/tools/image-cropper" },
   ];
-  const featuredTools = [
-  "Age Calculator",
-  "SIP Calculator",
-  "Image Compressor",
-];
 
-
+  const featuredTools = ["Age Calculator", "SIP Calculator", "Image Compressor"];
   const totalTools = tools.length;
+
   const calculators = [
-  "Age Calculator",
-  "GST Calculator",
-  "Percentage Calculator",
-  "BMI Calculator",
-  "EMI Calculator",
-  "Discount Calculator",
-  "SIP Calculator",
-  "Loan Calculator",
-  "Currency Converter",
-  "Unit Converter",
-];
+    "Age Calculator", "GST Calculator", "Percentage Calculator", "BMI Calculator",
+    "EMI Calculator", "Discount Calculator", "SIP Calculator", "Loan Calculator",
+    "Currency Converter", "Unit Converter",
+  ];
 
-const utilityTools = [
-  "Word Counter",
-  "Password Generator",
-  "QR Generator",
-  "Character Counter",
-  "Text Case Converter",
-  
-  
-];
+  const utilityTools = [
+    "Word Counter", "Password Generator", "QR Generator", "Character Counter", "Text Case Converter",
+  ];
 
-const imageTools = [
-  "Image Resizer",
-  "JPG to PNG",
-  "PNG to JPG",
-  "Image Compressor",
-  "Image Cropper"
-];
+  const imageTools = [
+    "Image Resizer", "JPG to PNG", "PNG to JPG", "Image Compressor", "Image Cropper"
+  ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-red-800">
-      {/* Navbar */}
-      <nav className="border-b bg-white">
+    <main className="min-h-screen bg-zinc-950 text-white font-sans antialiased selection:bg-red-500 selection:text-white overflow-x-hidden">
+      
+      {/* --- PREMIUM DARK NAVBAR --- */}
+      <nav className="border-b border-zinc-900 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-1">
-            
-
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
-              DRAKSYON
+            <h1 className="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-400">
+              DARK<span className="text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">SYON</span>
             </h1>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-gray-700">
-            <a href="/blog" className="hover:text-red-600">
-              Blog
-            </a>
-            
-            <a href="/" className="hover:text-red-600">
-              Home
-            </a>
-
-            <a href="/about" className="hover:text-red-600">
-              About
-            </a>
-
-            <a href="/contact" className="hover:text-red-600">
-              Contact
-            </a>
-
-            <a href="/privacy-policy" className="hover:text-red-600">
-              Privacy
-            </a>
+          <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-zinc-400">
+            <a href="/" className="hover:text-red-500 transition-colors">Home</a>
+            <a href="/blog" className="hover:text-red-500 transition-colors">Blog</a>
+            <a href="/about" className="hover:text-red-500 transition-colors">About</a>
+            <a href="/contact" className="hover:text-red-500 transition-colors">Contact</a>
+            <a href="/privacy-policy" className="hover:text-red-500 transition-colors">Privacy</a>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-black via-zinc-900 to-red-950 text-white text-center py-20 px-6">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+      {/* --- HERO SECTION --- */}
+      <section className="relative text-center py-24 px-6 overflow-hidden">
+        {/* Background Ambient Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-3xl mx-auto">
+          {/* Logo Handle check image path */}
           <img
             src="/logo.png"
             alt="DRAKSYON Logo"
-            className="w-40 md:w-56 mx-auto mb-6"
+            className="w-32 md:w-40 mx-auto mb-6 drop-shadow-[0_0_20px_rgba(239,68,68,0.2)]"
           />
-          DRAKSYON
-        </h1>
+          
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+            One Platform. <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600 drop-shadow-[0_0_15px_rgba(239,68,68,0.4)]">Unlimited Tools.</span>
+          </h1>
 
-        <p className="text-xl text-gray-300 mb-6">
-          Gaming • AI • Tools • Blogs
-        </p>
+          <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto mb-4">
+            Gaming • AI • Digital Utilities • Tech Blogs
+          </p>
 
-        <p className="text-red-500 font-semibold mb-8">
-          {totalTools}+ Digital Resources Available
-        </p>
+          <p className="text-red-500 text-sm font-mono tracking-widest uppercase mb-8">
+            // {totalTools}+ Premium Resources Loaded
+          </p>
 
-        <div className="max-w-md mx-auto mb-10 relative">
-          <input
-            type="text"
-            placeholder="🔍 Search games, tools, AI & blogs..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full border border-red-800 bg-zinc-900 text-white rounded-xl px-4 py-3"
-          />
+          {/* Search Bar */}
+          <div className="max-w-md mx-auto relative">
+            <input
+              type="text"
+              placeholder="Search games, tools, AI & blogs..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full border border-zinc-800 bg-zinc-900/50 text-white placeholder-zinc-500 rounded-xl px-4 py-3.5 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all duration-200"
+            />
 
-          {search && (
-            <div className="absolute left-0 right-0 top-full mt-2 bg-zinc-900 border border-red-900 rounded-xl shadow-xl z-50 overflow-hidden">
-              {tools
-                .filter((tool) =>
-                  tool.name.toLowerCase().includes(search.toLowerCase())
-                )
-                .slice(0, 8)
-                .map((tool) => (
-                  <a
-                    key={tool.name}
-                    href={tool.link}
-                    className="block px-4 py-3 cursor-pointer hover:bg-red-900 hover:text-red-300 transition text-gray-200 border-b border-gray-200 last:border-b-0"
-                  >
-                    {tool.name}
-                  </a>
-                ))}
-            </div>
-          )}
+            {search && (
+              <div className="absolute left-0 right-0 top-full mt-2 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl z-50 overflow-hidden text-left max-h-60 overflow-y-auto">
+                {tools
+                  .filter((tool) =>
+                    tool.name.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .slice(0, 8)
+                  .map((tool) => (
+                    <a
+                      key={tool.name}
+                      href={tool.link}
+                      className="block px-4 py-3 text-sm text-zinc-300 hover:bg-red-500/10 hover:text-white transition-colors border-b border-zinc-800/50 last:border-b-0"
+                    >
+                      {tool.name}
+                    </a>
+                  ))}
+              </div>
+            )}
+          </div>
         </div>
-
       </section>
 
-
-      {/* Stats Bar */}
-      <section className="max-w-6xl mx-auto px-6 pt-16 pb-12">
+      {/* --- STATS BAR --- */}
+      <section className="max-w-6xl mx-auto px-6 py-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-
-          <div className="bg-[#111111] text-white border border-red-900 p-6 rounded-3xl text-center">
-            <h3 className="text-2xl font-bold text-white">
-              {totalTools}
-            </h3>
-            <p className="text-white">
-              Tools
-            </p>
+          <div className="bg-zinc-900/40 border border-zinc-900 p-6 rounded-2xl text-center backdrop-blur-sm">
+            <h3 className="text-2xl font-black text-red-500">{totalTools}</h3>
+            <p className="text-zinc-400 text-xs mt-1 font-medium">Total Tools</p>
           </div>
-
-          <div className="bg-[#111111] text-white border border-red-900 p-6 rounded-3xl text-center">
-            <h3 className="text-2xl font-bold text-white">
-              100%
-            </h3>
-            <p className="text-white">
-              Free
-            </p>
+          <div className="bg-zinc-900/40 border border-zinc-900 p-6 rounded-2xl text-center backdrop-blur-sm">
+            <h3 className="text-2xl font-black text-red-500">100%</h3>
+            <p className="text-zinc-400 text-xs mt-1 font-medium">Free To Use</p>
           </div>
-
-          <div className="bg-[#111111] text-white border border-red-900 p-6 rounded-3xl text-center">
-            <h3 className="text-2xl font-bold text-white">
-              📱
-            </h3>
-            <p className="text-white">
-              Mobile Friendly
-            </p>
+          <div className="bg-zinc-900/40 border border-zinc-900 p-6 rounded-2xl text-center backdrop-blur-sm">
+            <h3 className="text-2xl font-black text-red-500">📱</h3>
+            <p className="text-zinc-400 text-xs mt-1 font-medium">Mobile Optimized</p>
           </div>
-
-          <div className="bg-[#111111] text-white border border-red-900 p-6 rounded-3xl text-center">
-            <h3 className="text-2xl font-bold text-white">
-              🔒
-            </h3>
-            <p className="text-white">
-              No Signup
-            </p>
+          <div className="bg-zinc-900/40 border border-zinc-900 p-6 rounded-2xl text-center backdrop-blur-sm">
+            <h3 className="text-2xl font-black text-red-500">🔒</h3>
+            <p className="text-zinc-400 text-xs mt-1 font-medium">No Login Needed</p>
           </div>
-
         </div>
       </section>
 
-
-      {/* Featured Tools */}
-      <section className="max-w-6x1 mx-auto px-6 pb-10 pt-8 bg-zinc-1000  rounded-3xl">
-        <h2 className="text-4xl font-bold text-center mb-10 text-white">
+      {/* --- MOST POPULAR TOOLS --- */}
+      <section className="max-w-6xl mx-auto px-6 py-12">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">
+          <span className="w-1 h-5 bg-red-500 rounded-full"></span>
           🔥 Most Popular Tools
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-           {tools
-             .filter((tool) =>
-               featuredTools.includes(tool.name)
-             )
-             .map((tool) => (
-               <a
-                 key={tool.name}
-                 href={tool.link}
-                 className="bg-[#111111] text-white border border-red-900 rounded-3xl p-8 text-center shadow-sm hover:shadow-lg hover:border-red-700 transition block"
-               >
-                 <h3 className="text-lg font-semibold text-white">
-                   {tool.name}
-                 </h3>
-               </a>
-             ))}
-         </div>
-       </section>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {tools
+            .filter((tool) => featuredTools.includes(tool.name))
+            .map((tool) => (
+              <a
+                key={tool.name}
+                href={tool.link}
+                className="group bg-zinc-900/40 border border-zinc-900/80 rounded-2xl p-6 text-center transition-all duration-300 hover:bg-zinc-900/80 hover:border-red-500/30 shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+              >
+                <h3 className="text-base font-semibold text-zinc-300 group-hover:text-white transition-colors">
+                  {tool.name}
+                </h3>
+              </a>
+            ))}
+        </div>
+      </section>
 
-      {/* Calculators */}
-<section className="max-w-6xl mx-auto px-6 pt-16 pb-10">
-  <h2 className="text-3xl font-bold text-center mb-10 text-white">
-    Calculators
-  </h2>
+      {/* --- CALCULATORS --- */}
+      <section className="max-w-6xl mx-auto px-6 py-12">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">
+          <span className="w-1 h-5 bg-red-500 rounded-full"></span>
+          Calculators
+        </h2>
 
-  <div className="grid md:grid-cols-3 gap-6">
-    {tools
-      .filter(
-        (tool) =>
-          calculators.includes(tool.name) &&
-          tool.name.toLowerCase().includes(search.toLowerCase())
-      )
-      .map((tool) => (
-        <a
-          key={tool.name}
-          href={tool.link}
-          className="bg-[#111111] text-white border border-red-900 rounded-2xl p-8 text-center shadow-lg hover:shadow-red-900/30 hover:border-red-700 transition block"
-        >
-          <h3 className="text-lg font-semibold text-white">
-            {tool.name}
-          </h3>
-        </a>
-      ))}
-  </div>
-</section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {tools
+            .filter((tool) => calculators.includes(tool.name) && tool.name.toLowerCase().includes(search.toLowerCase()))
+            .map((tool) => (
+              <a
+                key={tool.name}
+                href={tool.link}
+                className="group bg-zinc-900/30 border border-zinc-900/60 rounded-xl p-5 text-center transition-all duration-200 hover:bg-zinc-900/70 hover:border-red-500/20"
+              >
+                <h3 className="text-sm font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                  {tool.name}
+                </h3>
+              </a>
+            ))}
+        </div>
+      </section>
 
-{/* Utility Tools */}
-<section className="max-w-6xl mx-auto px-6 pb-20">
-  <h2 className="text-3xl font-bold text-center mb-10 text-white">
-    Utility Tools
-  </h2>
+      {/* --- UTILITY TOOLS --- */}
+      <section className="max-w-6xl mx-auto px-6 py-12">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">
+          <span className="w-1 h-5 bg-red-500 rounded-full"></span>
+          Utility Tools
+        </h2>
 
-  <div className="grid md:grid-cols-3 gap-6">
-    {tools
-      .filter(
-        (tool) =>
-          utilityTools.includes(tool.name) &&
-          tool.name.toLowerCase().includes(search.toLowerCase())
-      )
-      .map((tool) => (
-        <a
-          key={tool.name}
-          href={tool.link}
-          className="bg-[#111111] text-white border border-red-900 rounded-3xl p-8 text-center shadow-lg hover:shadow-red-900/30 hover:border-red-700 transition block"
-        >
-          <h3 className="text-lg font-semibold text-white">
-            {tool.name}
-          </h3>
-        </a>
-      ))}
-  </div>
-</section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {tools
+            .filter((tool) => utilityTools.includes(tool.name) && tool.name.toLowerCase().includes(search.toLowerCase()))
+            .map((tool) => (
+              <a
+                key={tool.name}
+                href={tool.link}
+                className="group bg-zinc-900/30 border border-zinc-900/60 rounded-xl p-5 text-center transition-all duration-200 hover:bg-zinc-900/70 hover:border-red-500/20"
+              >
+                <h3 className="text-sm font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                  {tool.name}
+                </h3>
+              </a>
+            ))}
+        </div>
+      </section>
 
-{/* Image Tools */}
-<section className="max-w-6xl mx-auto px-6 pb-20">
-  <h2 className="text-3xl font-bold text-center mb-10 text-white">
-    Image Tools
-  </h2>
+      {/* --- IMAGE TOOLS --- */}
+      <section className="max-w-6xl mx-auto px-6 py-12 mb-12">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">
+          <span className="w-1 h-5 bg-red-500 rounded-full"></span>
+          Image Tools
+        </h2>
 
-  <div className="grid md:grid-cols-3 gap-6">
-    {tools
-      .filter(
-        (tool) =>
-          imageTools.includes(tool.name) &&
-          tool.name.toLowerCase().includes(search.toLowerCase())
-      )
-      .map((tool) => (
-        <a
-          key={tool.name}
-          href={tool.link}
-          className="bg-[#111111] text-white border border-red-900 rounded-3xl p-8 text-center shadow-lg hover:shadow-red-900/30 hover:border-red-700 transition block"
-        >
-          <h3 className="text-lg font-semibold text-white">
-            {tool.name}
-          </h3>
-        </a>
-      ))}
-  </div>
-</section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {tools
+            .filter((tool) => imageTools.includes(tool.name) && tool.name.toLowerCase().includes(search.toLowerCase()))
+            .map((tool) => (
+              <a
+                key={tool.name}
+                href={tool.link}
+                className="group bg-zinc-900/30 border border-zinc-900/60 rounded-xl p-5 text-center transition-all duration-200 hover:bg-zinc-900/70 hover:border-red-500/20"
+              >
+                <h3 className="text-sm font-medium text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                  {tool.name}
+                </h3>
+              </a>
+            ))}
+        </div>
+      </section>
 
+      {/* --- FOOTER --- */}
+      <footer className="border-t border-zinc-900 bg-zinc-950 text-zinc-500 py-16 px-6">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 text-sm text-left">
+          <div>
+            <h3 className="font-bold text-white text-base mb-3">DARKSYON</h3>
+            <p className="text-zinc-400">Free high-performance digital tools & gaming utilities.</p>
+          </div>
+          <div>
+            <h3 className="font-bold text-zinc-300 mb-3">Quick Links</h3>
+            <ul className="space-y-2">
+              <li><a href="/about" className="hover:text-red-500 transition-colors">About Us</a></li>
+              <li><a href="/contact" className="hover:text-red-500 transition-colors">Contact</a></li>
+              <li><a href="/privacy-policy" className="hover:text-red-500 transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms-and-conditions" className="hover:text-red-500 transition-colors">Terms & Conditions</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-bold text-zinc-300 mb-3">Support</h3>
+            <p className="text-zinc-400">draksyon.support@gmail.com</p>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto border-t border-zinc-900/50 mt-12 pt-6 text-center text-xs">
+          © 2026 DRAKSYON. All Rights Reserved.
+        </div>
+      </footer>
 
-      {/* Footer */}
-      <footer className="bg-gradient-to-br from-black via-zinc-900 to-red-950 text-white text-center py-20 px-6">
-  <div className="max-w-7xl mx-auto px-6 py-10">
-    <div className="grid md:grid-cols-3 gap-8">
-
-      <div>
-        <h3 className="font-bold text-xl mb-3">
-          DRAKSYON
-        </h3>
-
-        <p>
-          Free online tools for everyone.
-        </p>
-      </div>
-
-      <div>
-        <h3 className="font-bold mb-3">
-          Quick Links
-        </h3>
-
-        <ul className="space-y-2">
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/privacy-policy">Privacy Policy</a></li>
-          <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 className="font-bold mb-3">
-          Contact
-        </h3>
-
-        <p>
-          draksyon.support@gmail.com
-        </p>
-      </div>
-
-    </div>
-
-    <div className="border-t border-red-500 mt-8 pt-4 text-center">
-      © 2026 DRAKSYON. All Rights Reserved.
-    </div>
-  </div>
-</footer>
     </main>
   );
 }

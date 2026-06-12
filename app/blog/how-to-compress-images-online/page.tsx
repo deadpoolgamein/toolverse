@@ -1,63 +1,68 @@
-export default function CompressImageArticle() {
+"use client";
+import { Image, ArrowRight, CheckCircle2, Shield } from "lucide-react";
+
+export default function ImageCompressorArticle() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-red-800 p-6">
-      <div className="max-w-3xl mx-auto border border-red-900 rounded-2xl p-8 bg-[#111111] shadow-lg">
+    <main className="min-h-screen bg-zinc-950 text-white font-sans antialiased pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto relative">
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-red-600/5 rounded-full blur-[100px] pointer-events-none" />
 
-        <h1 className="text-4xl font-bold mb-6 text-white">
-          How to Compress Images Online
-        </h1>
+        {/* --- AD SLOT 1 --- */}
+        <div className="w-full h-24 bg-zinc-900/30 border border-zinc-900 rounded-xl mb-10 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase">
+          [ Ad Space - Top Banner ]
+        </div>
 
-        <p className="text-white mb-4">
-          Large image files can slow down websites,
-          increase storage usage, and take longer to upload.
-          Compressing images helps reduce file size while
-          maintaining good image quality.
-        </p>
+        <div className="border-b border-zinc-900 pb-8 mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider uppercase bg-red-500/10 text-red-500 border border-red-500/20">
+              Optimization Guide
+            </span>
+            <span className="text-xs font-mono text-zinc-500">// Read Time: 4 mins</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-400 leading-tight">
+            How to Compress Images Online Without Losing Quality
+          </h1>
+        </div>
 
-        <p className="text-white mb-4">
-          Online image compression tools make it easy to
-          optimize photos, screenshots, and graphics without
-          installing any software. Simply upload an image,
-          choose a compression level, and download the
-          optimized version.
-        </p>
+        <div className="prose prose-invert max-w-none text-zinc-400 text-sm sm:text-base leading-relaxed space-y-6">
+          <p>
+            Large image sizes are the primary reason websites load slowly and mobile storage data gets drained. Compressing your images online ensures rapid delivery parameters without sacrificing essential visual clarity.
+          </p>
 
-        <p className="text-white mb-4">
-          Compressed images improve website performance,
-          reduce bandwidth usage, and help pages load faster.
-          This is especially important for blogs, online
-          stores, and business websites.
-        </p>
+          {/* --- CTA CARD --- */}
+          <div className="my-8 bg-gradient-to-r from-zinc-900 via-zinc-900 to-red-950/30 border border-zinc-800 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0 text-red-500">
+                <Image className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white mb-1">Darksyon Image Compressor</h3>
+                <p className="text-zinc-400 text-xs sm:text-sm">Optimize, resize, and shrink your JPG, PNG, or WebP files instantly for free.</p>
+              </div>
+            </div>
+            <a href="/tools/image-compressor" className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 font-bold bg-red-600 hover:bg-red-700 text-white text-sm rounded-xl transition-all group active:scale-95 whitespace-nowrap">
+              Launch Compressor <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
 
-        <p className="text-white mb-4">
-          DRAKSYON Image Compressor allows users to compress
-          images quickly and download the optimized file
-          directly in their browser.
-        </p>
-
-        <div className="mt-8 p-6 bg-[#111111] rounded-xl">
-          <h2 className="text-2xl font-bold text-white mb-3">
-            Benefits of Image Compression
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-200 pt-4 flex items-center gap-2">
+            <span className="w-1 h-4 bg-red-500 rounded-full inline-block"></span>
+            Smart Local Compression Algorithms
           </h2>
+          <p>
+            Unlike old-school compressors that upload your graphics to an external server, the modern <strong>Darksyon framework</strong> processes image pixels directly inside your web engine layer. Your personal photos or gaming assets are entirely secure.
+          </p>
 
-          <ul className="list-disc pl-6 text-white space-y-2">
-            <li>Faster website loading speed</li>
-            <li>Reduced file size</li>
-            <li>Lower bandwidth usage</li>
-            <li>Better user experience</li>
-            <li>Improved SEO performance</li>
-          </ul>
+          {/* --- AD SLOT 2 --- */}
+          <div className="w-full h-32 bg-zinc-900/30 border border-zinc-900 rounded-xl my-8 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase">
+            [ Ad Space - In-Article Banner ]
+          </div>
         </div>
 
-        <div className="mt-8">
-          <a
-            href="/tools/image-compressor"
-            className="inline-block text-white bg-[#111111] rounded-2xl p-6 border border-red-900 shadow-lg hover:shadow-red-900/30 hover:border-red-700 transition block hover:-translate-y-1 transition block border"
-          >
-            Try Image Compressor →
-          </a>
+        {/* --- AD SLOT 3 --- */}
+        <div className="w-full h-24 bg-zinc-900/30 border border-zinc-900 rounded-xl mt-12 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase">
+          [ Ad Space - Bottom Banner ]
         </div>
-
       </div>
     </main>
   );

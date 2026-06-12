@@ -1,66 +1,142 @@
 "use client";
 
 import { useState } from "react";
+import { Type, Sparkles, RefreshCw, Copy, Check } from "lucide-react";
 
 export default function TextCaseConverter() {
   const [text, setText] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  const convertToTitleCase = () => {
+    if (!text) return;
+    const transformed = text.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
+    );
+    setText(transformed);
+    setCopied(false);
+  };
+
+  const copyToClipboard = () => {
+    if (!text) return;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const resetTool = () => {
+    setText("");
+    setCopied(false);
+  };
 
   return (
-    <main className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="bg-white text-black shadow-lg rounded-2xl p-8 w-full max-w-2xl">
-        <h1 className="text-3xl font-bold text-center mb-6">
-          Text Case Converter
-        </h1>
+    <main className="min-h-screen bg-zinc-950 text-white font-sans antialiased pt-24 pb-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center relative">
+      
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] md:w-[500px] h-[300px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <textarea
-          rows={8}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Enter your text..."
-          className="w-full border p-4 rounded-lg mb-6"
-        />
+      {/* --- AD SLOT 1: TOP BANNER --- */}
+      <div className="w-full max-w-4xl h-24 bg-zinc-900/30 border border-zinc-900 rounded-xl mb-8 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase">
+        [ Ad Space - Top Banner ]
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-4">
+      <div className="w-full max-w-2xl relative z-10">
+        
+        {/* Tool Frame Box */}
+        <div className="bg-zinc-900/40 border border-zinc-900 rounded-3xl p-6 sm:p-8 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-sm">
+          
+          {/* Header */}
+          <div className="text-center mb-6 relative">
+            <div className="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-3 text-red-500 shadow-inner">
+              <Type className="w-6 h-6" />
+            </div>
+            <h1 className="text-2xl font-black tracking-tight text-zinc-100">
+              Text Case <span className="text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.3)]">Converter</span>
+            </h1>
+            <p className="text-zinc-500 text-xs mt-1">Transform string layouts and formatting paradigms instantly</p>
 
-          <button
-            onClick={() => setText(text.toUpperCase())}
-            className="bg-blue-600 text-white py-3 rounded-lg"
-          >
-            UPPERCASE
-          </button>
+            {/* Floating Operations Matrix (Copy & Clear Shortcuts) */}
+            {text && (
+              <div className="absolute right-0 top-2 flex gap-1.5 animate-fade-in">
+                <button
+                  onClick={copyToClipboard}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-mono font-bold bg-zinc-950 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white rounded-xl transition-all active:scale-95 shadow-lg"
+                  title="Copy Document"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copied ? "Copied" : "Copy"}</span>
+                </button>
+                <button
+                  onClick={resetTool}
+                  className="p-1.5 bg-zinc-950 border border-zinc-800 hover:border-red-950 text-zinc-500 hover:text-red-400 rounded-xl transition-all active:scale-95 shadow-lg"
+                  title="Clear Workspace"
+                >
+                  <RefreshCw className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+          </div>
 
-          <button
-            onClick={() => setText(text.toLowerCase())}
-            className="bg-blue-600 text-white py-3 rounded-lg"
-          >
-            lowercase
-          </button>
+          {/* Textarea Dashboard Editor */}
+          <div className="mb-6 relative">
+            <textarea
+              rows={8}
+              value={text}
+              onChange={(e) => { setText(e.target.value); setCopied(false); }}
+              placeholder="Type, paste, or inject your layout strings here..."
+              className="w-full border border-zinc-800 bg-zinc-950 text-white placeholder-zinc-700 rounded-2xl p-4 text-sm sm:text-base focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all resize-none shadow-inner leading-relaxed"
+            />
+          </div>
 
-          <button
-            onClick={() =>
-              setText(
-                text.replace(
-                  /\w\S*/g,
-                  (txt) =>
-                    txt.charAt(0).toUpperCase() +
-                    txt.substr(1).toLowerCase()
-                )
-              )
-            }
-            className="bg-blue-600 text-white py-3 rounded-lg"
-          >
-            Title Case
-          </button>
+          {/* Action Transformer Options Grid */}
+          <div>
+            <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 mb-4">
+              <Sparkles className="w-3 h-3 text-red-500" />
+              <span>Transformation Matrices</span>
+            </div>
 
-          <button
-            onClick={() => setText("")}
-            className="bg-red-500 text-white py-3 rounded-lg"
-          >
-            Clear
-          </button>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <button
+                onClick={() => { if(text) { setText(text.toUpperCase()); setCopied(false); } }}
+                disabled={!text}
+                className="py-3 px-4 font-mono font-bold bg-zinc-950 border border-zinc-800 hover:border-zinc-700 hover:text-red-500 disabled:opacity-40 disabled:hover:border-zinc-800 disabled:hover:text-zinc-500 rounded-xl text-zinc-300 text-xs tracking-wider transition-all uppercase"
+              >
+                UPPERCASE
+              </button>
+
+              <button
+                onClick={() => { if(text) { setText(text.toLowerCase()); setCopied(false); } }}
+                disabled={!text}
+                className="py-3 px-4 font-mono font-bold bg-zinc-950 border border-zinc-800 hover:border-zinc-700 hover:text-red-500 disabled:opacity-40 disabled:hover:border-zinc-800 disabled:hover:text-zinc-500 rounded-xl text-zinc-300 text-xs tracking-wider transition-all lowercase"
+              >
+                lowercase
+              </button>
+
+              <button
+                onClick={convertToTitleCase}
+                disabled={!text}
+                className="py-3 px-4 font-mono font-bold bg-zinc-950 border border-zinc-800 hover:border-zinc-700 hover:text-red-500 disabled:opacity-40 disabled:hover:border-zinc-800 disabled:hover:text-zinc-500 rounded-xl text-zinc-300 text-xs tracking-wider transition-all"
+              >
+                Title Case
+              </button>
+            </div>
+          </div>
+
+          {/* Clipboard Feedback Status */}
+          {copied && (
+            <div className="mt-4 text-center text-[10px] font-mono text-emerald-500 animate-fade-in">
+              ✓ Processed buffer cloned to system clipboard matrix!
+            </div>
+          )}
 
         </div>
       </div>
+
+      {/* --- AD SLOT 2: BOTTOM BANNER --- */}
+      <div className="w-full max-w-4xl h-24 bg-zinc-900/30 border border-zinc-900 rounded-xl mt-8 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase">
+        [ Ad Space - Bottom Banner ]
+      </div>
+
     </main>
   );
 }
