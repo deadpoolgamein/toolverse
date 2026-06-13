@@ -168,6 +168,67 @@ export default function Home() {
         </div>
       </section>
 
+      {/* --- AD SLOT 1: HOME TOP BANNER --- */}
+      <div className="w-full max-w-4xl mx-auto h-24 bg-zinc-900/30 border border-zinc-900 rounded-xl mb-12 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase relative z-10">
+        [ Ad Space - Home Top Banner ]
+      </div>
+
+      {/* --- PREMIUM BLOG DEEP-DIVE WIDGET --- */}
+<section className="w-full max-w-4xl mx-auto mt-16 px-4 relative z-10 mb-16"> {/* Yahan 'mb-16' add kiya hai extra spacing ke liye */}
+  {/* Border line indicator */}
+  <div className="w-full h-[1px] bg-zinc-900 mb-12" />
+
+  <div className="bg-zinc-900/20 border border-zinc-900 rounded-3xl p-6 sm:p-8 backdrop-blur-sm relative overflow-hidden group">
+    {/* Subtle card internal glow */}
+    <div className="absolute -top-24 -right-24 w-48 h-48 bg-red-600/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-125 transition-transform duration-500" />
+
+    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="space-y-3 max-w-2xl">
+        {/* Tag info */}
+        <div className="inline-flex items-center gap-1.5 font-mono text-[10px] text-red-500 font-bold tracking-widest uppercase">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+          <span>EXCLUSIVE INSIGHT ENGINE</span>
+        </div>
+        
+        {/* Blog Teaser Title */}
+        <h3 className="text-xl sm:text-2xl font-black tracking-tight text-zinc-100">
+          The Future of Single-Purpose AI Tools: Why Micro-Utilities Are Winning in 2026
+        </h3>
+        
+        {/* Short Teaser Text Related to Tools */}
+        <p className="text-zinc-400 text-sm leading-relaxed">
+          As the digital landscape matures, users are breaking away from bloated, multi-modal AI chatbots. Single-purpose macro grids and automated micro-utilities are completely capturing organic traffic by providing frictionless, millisecond-fast processing right inside the browser.
+        </p>
+      </div>
+
+      {/* Redirect Button to Full Blog Page */}
+      <div className="flex-shrink-0">
+        <Link 
+          href="/blog/future-of-ai-tools-2026"
+          className="inline-flex items-center gap-2 px-5 py-3 text-xs font-mono font-bold bg-zinc-950 border border-zinc-800 hover:border-zinc-700 hover:text-red-500 text-zinc-300 rounded-xl transition-all duration-300 active:scale-95 group/btn shadow-inner"
+        >
+          <span>READ FULL INSIGHT</span>
+          <svg 
+            className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+      {/* --- AD SLOT 2: HOME BOTTOM BANNER --- */}
+      <div className="w-full max-w-4xl mx-auto h-24 bg-zinc-900/30 border border-zinc-900 rounded-xl mt-16 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase relative z-10 shadow-inner"> {/* Yahan 'mt-16' badha diya hai */}
+        [ Ad Space - Home Bottom Banner ]
+      </div>
+
       {/* --- MOST POPULAR TOOLS --- */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">
@@ -340,6 +401,11 @@ export default function Home() {
             ))}
         </div>
       </section>
+
+      {/* --- AD SLOT 2: HOME BOTTOM BANNER (FIXED SPACING) --- */}
+      <div className="w-full max-w-4xl mx-auto h-24 bg-zinc-900/30 border border-zinc-900 rounded-xl mt-16 mb-20 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase relative z-10 shadow-inner">
+        [ Ad Space - Home Bottom Banner ]
+      </div>
 
       {/* --- FOOTER --- */}
       <footer className="border-t border-zinc-900 bg-zinc-950 text-zinc-500 py-16 px-6">
