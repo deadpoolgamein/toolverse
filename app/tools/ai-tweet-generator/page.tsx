@@ -17,7 +17,6 @@ export default function AITweetGenerator() {
     setResponse("");
 
     try {
-      // Free Gemini API Key Placeholder from Google AI Studio
       const res = await fetch("/api/tweet-generator", {
         method: "POST",
         headers: {
@@ -33,16 +32,20 @@ export default function AITweetGenerator() {
       const data = await res.json();
       let aiText = "System Timeout. Please check your API limits or configuration.";
 
-      if (data.success && typeof data.output === "string") {
+      // Strictly typed conditional check for backend response
+      if (data && typeof data === "object" && "success" in data && data.success && "output" in data && typeof data.output === "string") {
         aiText = data.output;
-      } else if (data?.candidates && Array.isArray(data.candidates) && data.candidates[0]) {
-        const candidate = data.candidates[0];
-        const content = candidate.content;
-        if (content && Array.isArray(content.parts) && content.parts[0]) {
-          const part = content.parts[0];
-          // part may be a string or an object with a text property
-          if (typeof part === "string") aiText = part;
-          else if (part && typeof part.text === "string") aiText = part.text;
+      } else if (data && typeof data === "object" && "candidates" in data && Array.isArray(data.candidates) && data.candidates) {
+        const candidate = data.candidates;
+        const content = candidate?.content;
+        if (content && Array.isArray(content.parts) && content.parts) {
+          const part = content.parts;
+          
+          if (typeof part === "string") {
+            aiText = part;
+          } else if (part && typeof part === "object" && "text" in part && typeof part.text === "string") {
+            aiText = part.text;
+          }
         }
       }
       setResponse(aiText);

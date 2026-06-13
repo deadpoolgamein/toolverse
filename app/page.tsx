@@ -78,16 +78,20 @@ export default function Home() {
           {/* Logo Handle check image path */}
           <img
             src="/logo.png"
-            alt="DRAKSYON Logo"
+            alt="Darksyon Logo"
             className="w-32 md:w-40 mx-auto mb-6 drop-shadow-[0_0_20px_rgba(239,68,68,0.2)]"
           />
           
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
-            One Platform. <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600 drop-shadow-[0_0_15px_rgba(239,68,68,0.4)]">Unlimited Tools.</span>
+            AI Tools, Generators <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600 drop-shadow-[0_0_15px_rgba(239,68,68,0.4)]">& Digital Utilities.</span>
           </h1>
 
           <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto mb-4">
             Gaming • AI • Digital Utilities • Tech Blogs
+          </p>
+
+          <p className="text-zinc-500 text-sm max-w-2xl mx-auto">
+            Free AI tools, generators, calculators and productivity utilities for creators, gamers and businesses.
           </p>
 
           <p className="text-red-500 text-sm font-mono tracking-widest uppercase mb-8">
@@ -103,6 +107,22 @@ export default function Home() {
               onChange={(e) => setSearch(e.target.value)}
               className="w-full border border-zinc-800 bg-zinc-900/50 text-white placeholder-zinc-500 rounded-xl px-4 py-3.5 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all duration-200"
             />
+
+            <div className="flex flex-wrap justify-center gap-3 mt-6">
+              <a
+                href="/tools/ai-tweet-generator"
+                className="px-5 py-2.5 bg-red-600 hover:bg-red-700 rounded-xl font-medium transition"
+             >
+                AI Tweet Generator
+              </a>
+
+              <a
+                href="/tools/ai-seo-description"
+                className="px-5 py-2.5 border border-zinc-700 hover:border-red-500 rounded-xl font-medium transition"
+             >
+                AI SEO Writer
+              </a>
+            </div>
 
             {search && (
               <div className="absolute left-0 right-0 top-full mt-2 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl z-50 overflow-hidden text-left max-h-60 overflow-y-auto">
@@ -335,6 +355,7 @@ export default function Home() {
               <li><a href="/contact" className="hover:text-red-500 transition-colors">Contact</a></li>
               <li><a href="/privacy-policy" className="hover:text-red-500 transition-colors">Privacy Policy</a></li>
               <li><a href="/terms-and-conditions" className="hover:text-red-500 transition-colors">Terms & Conditions</a></li>
+              <li><a href="/disclaimer" className="hover:text-red-500 transition-colors">Disclaimer</a></li>
             </ul>
           </div>
           <div>

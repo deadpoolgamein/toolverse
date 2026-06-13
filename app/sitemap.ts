@@ -1,62 +1,56 @@
-export default function sitemap() {
+import { MetadataRoute } from "next";
+
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://draksyon.vercel.app";
 
   return [
     {
       url: baseUrl,
       lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 1,
     },
     {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/privacy-policy`,
       lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/terms-and-conditions`,
       lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/tools/age-calculator`,
+      url: `${baseUrl}/disclaimer`,
       lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/tools/gst-calculator`,
+      url: `${baseUrl}/tools/ai-tweet-generator`,
       lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
     {
-      url: `${baseUrl}/tools/percentage-calculator`,
+      url: `${baseUrl}/tools/ai-seo-description`,
       lastModified: new Date(),
-    },
-    {
-      url: `${baseUrl}/tools/bmi-calculator`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${baseUrl}/tools/emi-calculator`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${baseUrl}/tools/discount-calculator`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${baseUrl}/tools/password-generator`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${baseUrl}/tools/word-counter`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${baseUrl}/tools/qr-generator`,
-      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
   ];
 }

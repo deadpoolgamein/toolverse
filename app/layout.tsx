@@ -12,7 +12,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Explicitly defined Type safety for next meta injection
 export const metadata: Metadata = {
   title: "DRAKSYON - Gaming, AI, Tools & Blogs",
   description:
