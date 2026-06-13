@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script"; // AdSense script chalane ke liye zaroori hai
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
- });
+});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -33,13 +32,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        {/* --- YAHA PAR AAPKA REAL ADSENSE CODE AUTOMATIC SET HAI --- */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8180011709154612"
+        {/* --- DIRECT HTML INJECTION FOR ADSENSE CRAWLER --- */}
+        <script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8180011709154612" 
           crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        ></script>
       </head>
       <body className="min-h-full flex flex-col bg-zinc-950 text-white">
         {children}
