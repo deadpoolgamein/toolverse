@@ -1,209 +1,236 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { LayoutDashboard, FileText, Send, ArrowLeft, CheckCircle2, Megaphone, EyeOff, Code } from "lucide-react";
-import Link from "next/link";
+import { supabase } from "../supabaseClient";
+import { LayoutDashboard, Megaphone, FileText, Settings, ShieldCheck } from "lucide-react";
 
 export default function AdminPanel() {
-  // Tabs for clean management
-  const [activeTab, setActiveTab] = useState("blog"); // blog, alert, ads, tools
-  const [status, setStatus] = useState("");
+  const [activeTab, setActiveTab] = useState<"blogs" | "alerts" | "settings">("blogs");
 
-  // 1. Blog State
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("tools");
-
-  // 2. Global Alert Banner State
+  // --- ALERT STATE SYSTEM ---
   const [alertText, setAlertText] = useState("");
-  const [alertActive, setAlertActive] = useState(false);
+  const [isAlertActive, setIsAlertActive] = useState(false);
+  const [alertStatus, setAlertStatus] = useState("");
 
-  // 3. AdSense Activation State
-  const [adsActive, setAdsActive] = useState(true);
+  // --- BLOG STATE SYSTEM (LIVE CLOUD) ---
+  const [newTitle, setNewTitle] = useState("");
+  const [newDesc, setNewDesc] = useState("");
+  const [newContent, setNewContent] = useState("");
+  const [blogStatus, setBlogStatus] = useState("");
 
-  // 4. Tool Status State
-  const [toolDisabled, setToolDisabled] = useState(false);
-
-  // Load existing settings on mount
+  // Load existing alert settings locally for now
   useEffect(() => {
-    const savedAlertText = localStorage.getItem("draksyon_alert_text") || "";
-    const savedAlertActive = localStorage.getItem("draksyon_alert_active") === "true";
-    const savedAdsActive = localStorage.getItem("draksyon_ads_active") !== "false"; // default true
-    const savedToolStatus = localStorage.getItem("draksyon_tool_disabled") === "true";
-
-    setAlertText(savedAlertText);
-    setAlertActive(savedAlertActive);
-    setAdsActive(savedAdsActive);
-    setToolDisabled(savedToolStatus);
+    if (typeof window !== "undefined") {
+      setAlertText(localStorage.getItem("draksyon_alert_text") || "");
+      setIsAlertActive(localStorage.getItem("draksyon_alert_active") === "true");
+    }
   }, []);
 
-  // Save Blog Handler
-  const handlePublishBlog = (e: React.FormEvent) => {
+  // --- ALERT SAVE HANDLER ---
+  const handleSaveAlerts = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !description || !content) {
-      alert("Arey bhai, Blog ki saari fields bharna zaroori hai!");
+    setAlertStatus("⚡ Committing alert modifications...");
+    try {
+      localStorage.setItem("draksyon_alert_text", alertText);
+      localStorage.setItem("draksyon_alert_active", isAlertActive ? "true" : "false");
+      
+      // Dispatch storage event to update layout ribbon instantly
+      window.dispatchEvent(new Event("storage"));
+      setAlertStatus("🚀 SYSTEM NOTICE UPDATE DISPATCHED SUCCESSFULLY!");
+    } catch (err) {
+      setAlertStatus("❌ NOTICE EXCEPTION: Verification failure");
+    }
+  };
+
+  // --- LIVE SUPABASE CLOUD PUBLISH HANDLER ---
+  const handlePublishBlog = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!newTitle || !newDesc) {
+      setBlogStatus("❌ Headline and Teaser Description are required!");
       return;
     }
-    const newPost = {
-      id: Date.now().toString(),
-      title, description, content, category,
-      date: new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
-    };
-    const existingPosts = JSON.parse(localStorage.getItem("draksyon_blogs") || "[]");
-    existingPosts.unshift(newPost);
-    localStorage.setItem("draksyon_blogs", JSON.stringify(existingPosts));
-    
-    setTitle(""); setDescription(""); setContent("");
-    triggerSuccess();
-  };
 
-  // Save System Configurations (Alerts, Ads, Tools)
-  const saveSystemConfig = () => {
-    localStorage.setItem("draksyon_alert_text", alertText);
-    localStorage.setItem("draksyon_alert_active", alertActive.toString());
-    localStorage.setItem("draksyon_ads_active", adsActive.toString());
-    localStorage.setItem("draksyon_tool_disabled", toolDisabled.toString());
-    triggerSuccess();
-  };
+    setBlogStatus("⚡ Syncing payload with Cloud Cluster...");
 
-  const triggerSuccess = () => {
-    setStatus("SUCCESS");
-    setTimeout(() => setStatus(""), 4000);
+    try {
+      // Supabase ke 'blogs' table mein automatic insert operation
+      const { data, error } = await supabase
+        .from("blogs")
+        .insert([
+          { 
+            title: newTitle, 
+            description: newDesc, 
+            content: newContent || newDesc 
+          }
+        ]);
+
+      if (error) throw error;
+
+      setBlogStatus("🚀 TRANSMISSION SUCCESSFUL: Live on Global Cloud Nodes!");
+      
+      // Clear forms after absolute delivery success
+      setNewTitle("");
+      setNewDesc("");
+      setNewContent("");
+
+    } catch (error: any) {
+      console.error("Cloud Error:", error);
+      setBlogStatus(`❌ MATRIX BREAK: ${error.message || "Database network timeout"}`);
+    }
   };
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white font-sans antialiased pt-24 pb-16 px-4 sm:px-6 relative">
-      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-red-600/5 rounded-full blur-[150px] pointer-events-none" />
-
-      <div className="max-w-3xl mx-auto relative z-10">
+    <main className="min-h-screen bg-zinc-950 text-white pt-28 pb-16 px-4 selection:bg-red-500/30 selection:text-red-200">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         
-        <Link href="/" className="inline-flex items-center gap-2 text-xs font-mono text-zinc-500 hover:text-red-500 transition-colors mb-6">
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>BACK TO MAIN PLATFORM</span>
-        </Link>
-
-        {/* Matrix Header */}
-        <div className="flex items-center justify-between border-b border-zinc-900 pb-6 mb-8">
-          <div className="flex items-center gap-3">
-            <LayoutDashboard className="w-7 h-7 text-red-500" />
-            <div>
-              <h1 className="text-2xl font-black tracking-tight">Darksyon Mega Control Panel</h1>
-              <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mt-0.5">Central Processing Unit Live</p>
+        {/* --- LEFT SIDE NAVIGATION CONTROLS --- */}
+        <div className="space-y-2 md:col-span-1">
+          <div className="p-4 border border-zinc-900 bg-zinc-900/10 rounded-2xl mb-4 font-mono">
+            <div className="flex items-center gap-2 text-xs font-bold text-red-500 tracking-wider">
+              <LayoutDashboard className="w-4 h-4" />
+              <span>CORE ADMIN MATRIX</span>
             </div>
           </div>
-        </div>
 
-        {/* Success Banner */}
-        {status === "SUCCESS" && (
-          <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center gap-3 font-mono text-sm">
-            <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-emerald-500" />
-            <span>Matrix config updated! Live nodes refreshed successfully.</span>
-          </div>
-        )}
+          <button
+            onClick={() => setActiveTab("blogs")}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-mono font-bold tracking-wider transition-all duration-200 ${
+              activeTab === "blogs"
+                ? "bg-red-600/10 border border-red-500/30 text-red-400 shadow-lg shadow-red-500/5"
+                : "border border-zinc-900 bg-transparent text-zinc-400 hover:border-zinc-800 hover:text-zinc-200"
+            }`}
+          >
+            <FileText className="w-4 h-4" />
+            <span>📝 BLOGS GATEWAY</span>
+          </button>
 
-        {/* Tab Switchers */}
-        <div className="grid grid-cols-4 gap-2 mb-8 bg-zinc-900/40 p-1.5 border border-zinc-900 rounded-xl font-mono text-[10px] sm:text-xs font-bold text-center">
-          <button onClick={() => setActiveTab("blog")} className={`py-2 rounded-lg transition-all ${activeTab === "blog" ? "bg-zinc-800 text-red-500 border border-zinc-700" : "text-zinc-400"}`}>
-            📝 BLOGS
-          </button>
-          <button onClick={() => setActiveTab("alert")} className={`py-2 rounded-lg transition-all ${activeTab === "alert" ? "bg-zinc-800 text-red-500 border border-zinc-700" : "text-zinc-400"}`}>
-            📢 ALERTS
-          </button>
-          <button onClick={() => setActiveTab("ads")} className={`py-2 rounded-lg transition-all ${activeTab === "ads" ? "bg-zinc-800 text-red-500 border border-zinc-700" : "text-zinc-400"}`}>
-            💰 ADS LAYOUT
-          </button>
-          <button onClick={() => setActiveTab("tools")} className={`py-2 rounded-lg transition-all ${activeTab === "tools" ? "bg-zinc-800 text-red-500 border border-zinc-700" : "text-zinc-400"}`}>
-            🛠️ TOOLS MGMT
+          <button
+            onClick={() => setActiveTab("alerts")}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-mono font-bold tracking-wider transition-all duration-200 ${
+              activeTab === "alerts"
+                ? "bg-red-600/10 border border-red-500/30 text-red-400 shadow-lg shadow-red-500/5"
+                : "border border-zinc-900 bg-transparent text-zinc-400 hover:border-zinc-800 hover:text-zinc-200"
+            }`}
+          >
+            <Megaphone className="w-4 h-4" />
+            <span>🚨 SYSTEM ALERTS</span>
           </button>
         </div>
 
-        {/* TAB 1: BLOG WRITER */}
-        {activeTab === "blog" && (
-          <form onSubmit={handlePublishBlog} className="space-y-5 bg-zinc-900/20 border border-zinc-900 rounded-2xl p-6 backdrop-blur-md">
-            <div className="grid grid-cols-2 gap-3">
-              <button type="button" onClick={() => setCategory("tools")} className={`py-2.5 rounded-xl text-xs font-mono font-bold border transition-all ${category === "tools" ? "bg-red-500/10 border-red-500 text-red-500" : "bg-zinc-950 border-zinc-800 text-zinc-400"}`}>TOOL BLOG GUIDE</button>
-              <button type="button" onClick={() => setCategory("random")} className={`py-2.5 rounded-xl text-xs font-mono font-bold border transition-all ${category === "random" ? "bg-red-500/10 border-red-500 text-red-500" : "bg-zinc-950 border-zinc-800 text-zinc-400"}`}>RANDOM TECH INSIGHT</button>
-            </div>
-            <div>
-              <label className="block text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Headline</label>
-              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter post title..." className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm focus:border-red-500 text-zinc-200 outline-none" />
-            </div>
-            <div>
-              <label className="block text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Short Summary</label>
-              <textarea rows={2} value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Summary for home card grid..." className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm focus:border-red-500 text-zinc-200 outline-none resize-none" />
-            </div>
-            <div>
-              <label className="block text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Main Content</label>
-              <textarea rows={6} value={content} onChange={(e) => setContent(e.target.value)} placeholder="Full content body here..." className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm focus:border-red-500 text-zinc-200 outline-none" />
-            </div>
-            <button type="submit" className="w-full flex items-center justify-center gap-2 py-3.5 text-xs font-mono font-bold bg-zinc-100 text-zinc-950 hover:bg-red-500 hover:text-white rounded-xl transition-all">
-              <Send className="w-3.5 h-3.5" /> PUBLISH DYNAMIC BLOG
-            </button>
-          </form>
-        )}
-
-        {/* TAB 2: GLOBAL NOTICE BANNER */}
-        {activeTab === "alert" && (
-          <div className="space-y-6 bg-zinc-900/20 border border-zinc-900 rounded-2xl p-6 backdrop-blur-md">
-            <div>
-              <label className="block text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Global Alert Ribbon Text</label>
-              <input type="text" value={alertText} onChange={(e) => setAlertText(e.target.value)} placeholder="e.g., 🚀 Server Patch 1.0.4 deployed. Processing speeds enhanced by 200%!" className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm focus:border-red-500 text-zinc-200 outline-none" />
-            </div>
-            <div className="flex items-center justify-between bg-zinc-950 p-4 border border-zinc-900 rounded-xl">
-              <div className="flex items-center gap-2">
-                <Megaphone className="w-4 4-4 text-zinc-500" />
-                <span className="text-xs font-mono text-zinc-400">Display Status: {alertActive ? "ON LIVE HEADER" : "HIDDEN"}</span>
+        {/* --- RIGHT SIDE WORKSPACE CONFIGURATION --- */}
+        <div className="md:col-span-3 bg-zinc-900/10 border border-zinc-900 rounded-3xl p-6 sm:p-8 backdrop-blur-md relative overflow-hidden">
+          
+          {/* TAB 1: LIVE CLOUD BLOG CMS */}
+          {activeTab === "blogs" && (
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-xl font-black tracking-tight text-zinc-100">Live Database Blog Publisher</h2>
+                <p className="text-xs font-mono text-zinc-500 mt-1">Deploy automated dynamic markdown payloads directly to global infrastructure nodes.</p>
               </div>
-              <button onClick={() => setAlertActive(!alertActive)} className={`px-4 py-1.5 rounded-lg text-[10px] font-mono font-bold border ${alertActive ? "bg-emerald-500/10 border-emerald-500 text-emerald-400" : "bg-zinc-900 border-zinc-800 text-zinc-500"}`}>
-                {alertActive ? "DEACTIVATE" : "ACTIVATE"}
-              </button>
-            </div>
-            <button onClick={saveSystemConfig} className="w-full py-3.5 text-xs font-mono font-bold bg-zinc-100 text-zinc-950 hover:bg-red-500 hover:text-white rounded-xl transition-all">
-              SAVE NOTICE BOARD NODE
-            </button>
-          </div>
-        )}
 
-        {/* TAB 3: ADS MONETIZATION LAYOUT */}
-        {activeTab === "ads" && (
-          <div className="space-y-6 bg-zinc-900/20 border border-zinc-900 rounded-2xl p-6 backdrop-blur-md">
-            <div className="flex items-center justify-between bg-zinc-950 p-4 border border-zinc-900 rounded-xl">
-              <div className="flex items-center gap-2">
-                <Code className="w-4 h-4 text-zinc-500" />
-                <span className="text-xs font-mono text-zinc-400">Google AdSense Injector Modules</span>
+              <form onSubmit={handlePublishBlog} className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-mono font-bold text-zinc-400 uppercase tracking-widest">Post Title / Headline</label>
+                  <input
+                    type="text"
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
+                    placeholder="e.g., The Death of Bloated AI: Micro-Utilities in 2026"
+                    className="w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 rounded-xl px-4 py-3 text-sm text-zinc-200 outline-none font-sans transition-all"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-mono font-bold text-zinc-400 uppercase tracking-widest">Short Teaser Summary</label>
+                  <input
+                    type="text"
+                    value={newDesc}
+                    onChange={(e) => setNewDesc(e.target.value)}
+                    placeholder="Provide a compelling 2-line description for the main card module..."
+                    className="w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 rounded-xl px-4 py-3 text-sm text-zinc-200 outline-none font-sans transition-all"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-mono font-bold text-zinc-400 uppercase tracking-widest">Main Article Body Content</label>
+                  <textarea
+                    rows={6}
+                    value={newContent}
+                    onChange={(e) => setNewContent(e.target.value)}
+                    placeholder="Enter structural detailed paragraphs for the standalone reading router..."
+                    className="w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 rounded-xl px-4 py-3 text-sm text-zinc-200 outline-none font-sans transition-all resize-none"
+                  />
+                </div>
+
+                {blogStatus && (
+                  <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl font-mono text-[11px] text-red-400 animate-pulse">
+                    {blogStatus}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full bg-zinc-100 hover:bg-zinc-200 text-zinc-950 font-mono text-xs font-black tracking-widest py-3.5 px-6 rounded-xl transition-all active:scale-[0.99]"
+                >
+                  PUBLISH DYNAMIC BLOG NODE
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* TAB 2: GLOBAL NOTICE BOARD ALERTS */}
+          {activeTab === "alerts" && (
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-xl font-black tracking-tight text-zinc-100">Global System Alerts</h2>
+                <p className="text-xs font-mono text-zinc-500 mt-1">Broadcast high-priority notices dynamically right above the structural layout navigation menu.</p>
               </div>
-              <button onClick={() => setAdsActive(!adsActive)} className={`px-4 py-1.5 rounded-lg text-[10px] font-mono font-bold border ${adsActive ? "bg-emerald-500/10 border-emerald-500 text-emerald-400" : "bg-zinc-900 border-zinc-800 text-zinc-500"}`}>
-                {adsActive ? "ADS MODE: ACTIVE" : "ADS MODE: DISABLED"}
-              </button>
-            </div>
-            <p className="text-[11px] font-mono text-zinc-500 leading-relaxed bg-zinc-950/50 p-3 rounded-lg border border-zinc-900">
-              💡 NOTE: Disabling this module turns off all [Ad Space placeholders] instantly across home and inner routes for clear premium analytics testing.
-            </p>
-            <button onClick={saveSystemConfig} className="w-full py-3.5 text-xs font-mono font-bold bg-zinc-100 text-zinc-950 hover:bg-red-500 hover:text-white rounded-xl transition-all">
-              SAVE AD MATRIX RULES
-            </button>
-          </div>
-        )}
 
-        {/* TAB 4: TOOLS MANAGEMENT */}
-        {activeTab === "tools" && (
-          <div className="space-y-6 bg-zinc-900/20 border border-zinc-900 rounded-2xl p-6 backdrop-blur-md">
-            <div className="flex items-center justify-between bg-zinc-950 p-4 border border-zinc-900 rounded-xl">
-              <div className="flex items-center gap-2">
-                <EyeOff className="w-4 h-4 text-zinc-500" />
-                <span className="text-xs font-mono text-zinc-400">Emergency Maintenance Lock (Main Tool Grid)</span>
-              </div>
-              <button onClick={() => setToolDisabled(!toolDisabled)} className={`px-4 py-1.5 rounded-lg text-[10px] font-mono font-bold border ${toolDisabled ? "bg-red-500/10 border-red-500 text-red-500" : "bg-zinc-900 border-zinc-800 text-zinc-500"}`}>
-                {toolDisabled ? "UNDER MAINTENANCE: ON" : "RUNNING SMOOTH"}
-              </button>
-            </div>
-            <button onClick={saveSystemConfig} className="w-full py-3.5 text-xs font-mono font-bold bg-zinc-100 text-zinc-950 hover:bg-red-500 hover:text-white rounded-xl transition-all">
-              SAVE SYSTEM STATE
-            </button>
-          </div>
-        )}
+              <form onSubmit={handleSaveAlerts} className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-[11px] font-mono font-bold text-zinc-400 uppercase tracking-widest block">Alert Matrix Status</label>
+                  <button
+                    type="button"
+                    onClick={() => setIsAlertActive(!isAlertActive)}
+                    className={`px-5 py-2.5 rounded-xl font-mono text-xs font-bold border transition-all ${
+                      isAlertActive 
+                        ? "bg-red-600/10 border-red-500/30 text-red-400" 
+                        : "bg-zinc-950 border-zinc-800 text-zinc-500"
+                    }`}
+                  >
+                    STATUS: {isAlertActive ? "🔴 ACTIVE BROADCASTING" : "⚪ MUTED DEACTIVATED"}
+                  </button>
+                </div>
 
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-mono font-bold text-zinc-400 uppercase tracking-widest">Notice Text Script</label>
+                  <input
+                    type="text"
+                    value={alertText}
+                    onChange={(e) => setAlertText(e.target.value)}
+                    placeholder="e.g., MATRIX MAINTENANCE PROTOCOL ENGAGED: UNDERGOING CLUSTER OPTIMIZATION"
+                    className="w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 rounded-xl px-4 py-3 text-sm text-zinc-200 outline-none font-mono transition-all"
+                  />
+                </div>
+
+                {alertStatus && (
+                  <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl font-mono text-[11px] text-red-400 animate-pulse">
+                    {alertStatus}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full bg-zinc-100 hover:bg-zinc-200 text-zinc-950 font-mono text-xs font-black tracking-widest py-3.5 px-6 rounded-xl transition-all active:scale-[0.99]"
+                >
+                  SAVE SYSTEM NOTICE NODE
+                </button>
+              </form>
+            </div>
+          )}
+
+        </div>
       </div>
     </main>
   );

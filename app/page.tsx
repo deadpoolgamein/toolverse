@@ -1,10 +1,49 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "./supabaseClient";
 
 export default function Home() {
-  
+  // --- DETECT LIVE BLOG DATA FROM SUPABASE CLOUD ---
+  const [blogData, setBlogData] = useState<{ title: string; description: string } | null>(null);
+
+  useEffect(() => {
+    const fetchLiveBlog = async () => {
+      try {
+        // Supabase se blogs table ka sabse naya (latest) data order wise uthana
+        const { data, error } = await supabase
+          .from("blogs")
+          .select("title, description")
+          .order("id", { ascending: false }) // Newest post first
+          .limit(1);
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          setBlogData({
+            title: data[0].title,
+            description: data[0].description
+          });
+        } else {
+          // Backup Default Text agar database khali ho
+          setBlogData({
+            title: "The Future of Single-Purpose AI Tools: Why Micro-Utilities Are Winning in 2026",
+            description: "As the digital landscape matures, users are breaking away from bloated, multi-modal AI chatbots. Single-purpose macro grids are capturing organic traffic."
+          });
+        }
+      } catch (err) {
+        console.error("Error fetching live blog:", err);
+        // Error ke case mein bhi screen blank nahi hogi, fallback dikhega
+        setBlogData({
+          title: "The Future of Single-Purpose AI Tools: Why Micro-Utilities Are Winning in 2026",
+          description: "As the digital landscape matures, users are breaking away from bloated, multi-modal AI chatbots. Single-purpose macro grids are capturing organic traffic."
+        });
+      }
+    };
+
+    fetchLiveBlog();
+  }, []);
   const [search, setSearch] = useState("");
   const tools = [
     { name: "Age Calculator", link: "/tools/age-calculator" },
@@ -153,48 +192,46 @@ export default function Home() {
         [ Ad Space - Home Top Banner ]
       </div>
 
-      {/* --- DYNAMIC FEATURED BLOG WIDGET --- */}
+      {/* --- DYNAMIC FEATURED BLOG WIDGET (FLICKER-PROOF) --- */}
 <section className="w-full max-w-4xl mx-auto mt-16 px-4 relative z-10 mb-16">
-  {/* Border line indicator */}
   <div className="w-full h-[1px] bg-zinc-900 mb-12" />
 
   <div className="bg-zinc-900/20 border border-zinc-900 rounded-3xl p-6 sm:p-8 backdrop-blur-sm relative overflow-hidden group">
-    {/* Subtle card internal glow */}
     <div className="absolute -top-24 -right-24 w-48 h-48 bg-red-600/10 rounded-full blur-[60px] pointer-events-none group-hover:scale-125 transition-transform duration-500" />
 
     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
       <div className="space-y-3 max-w-2xl">
-        {/* Dynamic Tag */}
         <div className="inline-flex items-center gap-1.5 font-mono text-[10px] text-red-500 font-bold tracking-widest uppercase">
           <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
           <span>FEATURED INSIGHT HUB</span>
         </div>
         
-        {/* 1. BLOG TITLE: Jab bhi random blog badalna ho, yahan text change karein */}
-        <h3 className="text-xl sm:text-2xl font-black tracking-tight text-zinc-100">
-          The Future of Single-Purpose AI Tools: Why Micro-Utilities Are Winning in 2026
-        </h3>
-        
-        {/* 2. BLOG DESCRIPTION: Is text ko aap naye blog ke hisab se badal sakte hain */}
-        <p className="text-zinc-400 text-sm leading-relaxed">
-          As the digital landscape matures, users are breaking away from bloated, multi-modal AI chatbots. Single-purpose macro grids and automated micro-utilities are completely capturing organic traffic by providing frictionless, millisecond-fast processing right inside the browser.
-        </p>
+        {/* 🔴 Only render when blogData is populated inside browser (No more flicker) */}
+        {blogData ? (
+          <>
+            <h3 className="text-xl sm:text-2xl font-black tracking-tight text-zinc-100 transition-all">
+              {blogData.title}
+            </h3>
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              {blogData.description}
+            </p>
+          </>
+        ) : (
+          // Temporary placeholder box with same exact height to avoid layout shift
+          <div className="space-y-2 py-2">
+            <div className="h-6 bg-zinc-900/50 rounded w-3/4 animate-pulse" />
+            <div className="h-4 bg-zinc-900/50 rounded w-full animate-pulse" />
+          </div>
+        )}
       </div>
 
-      {/* Redirect Button */}
       <div className="flex-shrink-0">
-        {/* 3. BUTTON LINK: Jab bhi koi random ya naya blog page aaye, bas href="/blog/apna-naya-folder" yahan change kar dena */}
         <Link 
-          href="/blog" // Abhi isko simple main '/blog' page par daal diya hai taaki 404 error na aaye!
+          href="/random-blog" 
           className="inline-flex items-center gap-2 px-5 py-3 text-xs font-mono font-bold bg-zinc-950 border border-zinc-800 hover:border-zinc-700 hover:text-red-500 text-zinc-300 rounded-xl transition-all duration-300 active:scale-95 group/btn shadow-inner"
         >
-          <span>EXPLORE BLOGS</span>
-          <svg 
-            className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
+          <span>READ FULL ARTICLE</span>
+          <svg className="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </Link>
