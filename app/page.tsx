@@ -68,6 +68,7 @@ export default function Home() {
     { name: "Image Cropper", link: "/tools/image-cropper" },
     { name: "AI Tweet Generator", link: "/tools/ai-tweet-generator" },
     { name: "AI SEO Meta Writer", link: "/tools/ai-seo-description" },
+    { name: "BG Remover", link: "/tools/bg-remover" },
   ];
 
   const featuredTools = ["Age Calculator", "SIP Calculator", "Image Compressor"];
@@ -84,7 +85,7 @@ export default function Home() {
   ];
 
   const imageTools = [
-    "Image Resizer", "JPG to PNG", "PNG to JPG", "Image Compressor", "Image Cropper"
+    "Image Resizer", "JPG to PNG", "PNG to JPG", "Image Compressor", "Image Cropper", "BG Remover",
   ];
 
   return (
