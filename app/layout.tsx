@@ -51,8 +51,8 @@ export default function RootLayout({
             </div>
           )}
 
-          {/* STICKY NAV THAT STAYS ON TOP ON SCROLL */}
-          <nav className={`border-b border-zinc-900 bg-zinc-950/80 backdrop-blur-md sticky z-40 ${isAlertActive && alertText ? 'top-[37px]' : 'top-0'}`}>
+          {/* 🔴 NAVIGATION BAR WITH FIXED SOLID DARK STYLE */}
+          <nav className={`border-b border-zinc-900/80 bg-zinc-950 backdrop-blur-md sticky z-40 transition-all duration-200 ${isAlertActive && alertText ? 'top-[37px]' : 'top-0'}`}>
             <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
               
               <div className="flex items-center gap-1">
