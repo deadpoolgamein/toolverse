@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
+  
   const [search, setSearch] = useState("");
   const tools = [
     { name: "Age Calculator", link: "/tools/age-calculator" },
@@ -49,38 +50,17 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-zinc-950 text-white font-sans antialiased selection:bg-red-500 selection:text-white overflow-x-hidden">
-      
-      {/* --- PREMIUM DARK NAVBAR --- */}
-      <nav className="border-b border-zinc-900 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-1">
-            <h1 className="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-400">
-              DARK<span className="text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">SYON</span>
-            </h1>
-          </div>
 
-          <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-zinc-400">
-            <a href="/" className="hover:text-red-500 transition-colors">Home</a>
-            <a href="/blog" className="hover:text-red-500 transition-colors">Blog</a>
-            <a href="/about" className="hover:text-red-500 transition-colors">About</a>
-            <a href="/contact" className="hover:text-red-500 transition-colors">Contact</a>
-            <a href="/privacy-policy" className="hover:text-red-500 transition-colors">Privacy</a>
-          </div>
-        </div>
-      </nav>
+      
+      
+      
 
       {/* --- HERO SECTION --- */}
       <section className="relative text-center py-24 px-6 overflow-hidden">
         {/* Background Ambient Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="relative z-10 max-w-3xl mx-auto">
-          {/* Logo Handle check image path */}
-          <img
-            src="/logo.png"
-            alt="Darksyon Logo"
-            className="w-32 md:w-40 mx-auto mb-6 drop-shadow-[0_0_20px_rgba(239,68,68,0.2)]"
-          />
+        <div className="relative z-10 max-w-4xl mx-auto">
           
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
             AI Tools, Generators <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600 drop-shadow-[0_0_15px_rgba(239,68,68,0.4)]">& Digital Utilities.</span>
