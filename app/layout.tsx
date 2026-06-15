@@ -29,7 +29,8 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en">
+    // 🛡️ SUPPRESS HYDRATION WARNING ADDED HERE TO KILL THE NEXT.JS HIDDEN CACHE ERRORS
+    <html lang="en" suppressHydrationWarning>
       {/* 🔴 GOOGLE VERIFICATION HEAD SECTION 🔴 */}
       <head>
         {/* 1. APNA GOOGLE SITE VERIFICATION CODE NICHE VALA CONTENT="..." MEIN REPLACE KAREIN */}
@@ -39,10 +40,8 @@ export default function RootLayout({
         <title>Darksyon - Matrix Tools Portal</title>
       </head>
 
-      <body className="bg-zinc-950 text-white min-h-screen antialiased selection:bg-red-500/30 selection:text-red-200">
+      <body className="bg-zinc-950 text-white min-h-screen antialiased selection:bg-red-500/30 selection:text-red-200" suppressHydrationWarning>
         
-        
-
         {/* POOL WRAPPER */}
         <div className="flex flex-col min-h-screen">
 
