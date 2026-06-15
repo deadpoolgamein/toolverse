@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Megaphone } from "lucide-react";
 import Link from "next/link";
 import "./globals.css"; 
+import Script from "next/script";
 
 export default function RootLayout({
   children,
@@ -40,6 +41,8 @@ export default function RootLayout({
 
       <body className="bg-zinc-950 text-white min-h-screen antialiased selection:bg-red-500/30 selection:text-red-200">
         
+        
+
         {/* POOL WRAPPER */}
         <div className="flex flex-col min-h-screen">
 
