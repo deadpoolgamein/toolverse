@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Building2, Search, ChevronRight, ArrowRight, Zap, Flame } from "lucide-react";
 import Link from "next/link";
-import { Scale, Gauge, Cpu, Scissors, Activity, Layers } from "lucide-react";
+import { Scale, Gauge, Cpu, Scissors, Activity, Layers, Move } from "lucide-react";
 
 
 const industrialToolsList = [
@@ -87,6 +87,14 @@ const industrialToolsList = [
     link: "/tools/industrial/bending-calculator",
     borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
     icon: Layers
+  },
+  {
+    id: "pipe-wrap-calculator",
+    title: "Pipe Wrap Template Calculator",
+    description: "Generate 2D paper wrapping strip patterns and markers for complex pipe saddle notch profiling.",
+    link: "/tools/industrial/pipe-wrap-calculator",
+    borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
+    icon: Move
   }
 ];
 
