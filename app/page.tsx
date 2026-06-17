@@ -6,6 +6,8 @@ import {
   Hammer, 
   HardHat, 
   ArrowRight, 
+  Video, // Make sure to import Video from lucide-react
+
   Bot, 
   Calculator, 
   Image as ImageIcon, 
@@ -94,7 +96,17 @@ const toolCategories = [
     count: "New Hub",
     borderGlow: "hover:border-blue-500/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]",
     tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20"
-  }
+  },
+  {
+    id: "video",
+    title: "Video Processing Suite",
+    description: "High-performance client-side video background removal, real-time filters, and layout manipulation modules.",
+    link: "/tools/video",
+    icon: Video, // Import Video from lucide-react at the top if not there
+    count: "New Suite",
+    borderGlow: "hover:border-sky-500/30 hover:shadow-[0_0_40px_rgba(14,165,233,0.15)]",
+    tagColor: "bg-sky-500/10 text-sky-400 border-sky-500/20"
+  },
 ];
 
 export default function HomePage() {
