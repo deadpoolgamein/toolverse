@@ -1,155 +1,169 @@
 "use client";
 
-import { useState } from "react";
-import { Search, Sparkles, Video, Image as ImageIcon, Calculator, Zap, Building2, ChevronRight } from "lucide-react";
+import { 
+  Building2, 
+  Zap, 
+  Hammer, 
+  HardHat, 
+  ArrowRight, 
+  Bot, 
+  Calculator, 
+  Image as ImageIcon, 
+  Wrench 
+} from "lucide-react";
 import Link from "next/link";
 
-const portalHubs = [
+// 🗂️ ABSOLUTE CORE DIRECTORY MAPPING (8 CATEGORIES BASED ON PROJECT ROOT)
+const toolCategories = [
   {
-    id: "ai-tools",
-    title: "AI Power Tools",
-    description: "Enterprise neural computational tools for automation and generation.",
-    icon: Sparkles,
-    color: "bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-blue-500/30",
-    shadow: "hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]",
+    id: "industrial",
+    title: "Industrial & Welding Suite",
+    description: "Advanced parameters for arc welding, miter cuts, metal mass estimation, and pipe notch profiles.",
+    link: "/tools/industrial",
+    icon: Building2,
+    count: "7 Active",
+    borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_40px_rgba(239,68,68,0.15)]",
+    tagColor: "bg-red-500/10 text-red-400 border-red-500/20"
+  },
+  {
+    id: "ai",
+    title: "AI Generation Suite",
+    description: "Artificial Intelligence models and prompt generation matrices for automated asset workflows.",
     link: "/tools/ai",
-  },
-  {
-    id: "video-studio",
-    title: "Video Studio",
-    description: "Browser-side instant video manipulation, conversion, and effects.",
-    icon: Video,
-    color: "bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-green-500/30",
-    shadow: "hover:shadow-[0_0_30px_rgba(34,197,94,0.1)]",
-    link: "/tools/video",
-  },
-  {
-    id: "image-hub",
-    title: "Image Hub",
-    description: "Cloud and client-side photo processing, background removal, and editing.",
-    icon: ImageIcon,
-    color: "bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-amber-500/30",
-    shadow: "hover:shadow-[0_0_30px_rgba(245,158,11,0.1)]",
-    link: "/tools/image",
+    icon: Bot,
+    count: "AI Core",
+    borderGlow: "hover:border-indigo-500/30 hover:shadow-[0_0_40px_rgba(99,102,241,0.15)]",
+    tagColor: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20"
   },
   {
     id: "calculators",
-    title: "Calculators",
-    description: "Advanced computational tools for multi-disciplinary complex mathematics.",
-    icon: Calculator,
-    color: "bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-purple-500/30",
-    shadow: "hover:shadow-[0_0_30px_rgba(168,85,247,0.1)]",
+    title: "Advanced Calculators",
+    description: "Multi-functional mathematical formulas, ratios, and standard numeric engineering solvers.",
     link: "/tools/calculators",
+    icon: Calculator,
+    count: "Core",
+    borderGlow: "hover:border-purple-500/30 hover:shadow-[0_0_40px_rgba(168,85,247,0.15)]",
+    tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20"
   },
   {
-    id: "industrial-suite",
-    title: "Industrial Suite",
-    description: "Niche computational tools for engineering, fabrication, and welding.",
-    icon: Building2,
-    color: "bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-red-500/30",
-    shadow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
-    link: "/tools/industrial",
-  },
-  {
-    id: "utility-box",
-    title: "Utility Box",
-    description: "A collective toolkit for everyday file operations and system checks.",
+    id: "electrical",
+    title: "Electrical & Power Suite",
+    description: "Automated load calculation matrix, safe wire gauge configurations, and voltage drop limits.",
+    link: "/tools/electrical",
     icon: Zap,
-    color: "bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-cyan-500/30",
-    shadow: "hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]",
-    link: "/tools/utility",
+    count: "New Hub",
+    borderGlow: "hover:border-amber-500/30 hover:shadow-[0_0_40px_rgba(245,158,11,0.15)]",
+    tagColor: "bg-amber-500/10 text-amber-400 border-amber-500/20"
   },
+  {
+    id: "image",
+    title: "Image & Media Tools",
+    description: "Client-side image compression, format converters, and visual dimension modification tools.",
+    link: "/tools/image",
+    icon: ImageIcon,
+    count: "Media",
+    borderGlow: "hover:border-pink-500/30 hover:shadow-[0_0_40px_rgba(244,63,94,0.15)]",
+    tagColor: "bg-pink-500/10 text-pink-400 border-pink-500/20"
+  },
+  {
+    id: "utility",
+    title: "General Utilities",
+    description: "Essential cross-industry daily production tools, text formatters, and baseline units micro-apps.",
+    link: "/tools/utility",
+    icon: Wrench,
+    count: "Utility",
+    borderGlow: "hover:border-cyan-500/30 hover:shadow-[0_0_40px_rgba(6,182,212,0.15)]",
+    tagColor: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
+  },
+  {
+    id: "woodworking",
+    title: "Carpentry & Woodworking Suite",
+    description: "Cubic Feet (CFT) timber volume estimators and plywood blank yield layout optimization tools.",
+    link: "/tools/woodworking",
+    icon: Hammer,
+    count: "New Hub",
+    borderGlow: "hover:border-emerald-500/30 hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]",
+    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+  },
+  {
+    id: "construction",
+    title: "Civil Construction Suite",
+    description: "Precision estimation matrix for brick counts, concrete volumetric ratios, and floor tile pricing layout.",
+    link: "/tools/construction",
+    icon: HardHat,
+    count: "New Hub",
+    borderGlow: "hover:border-blue-500/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]",
+    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20"
+  }
 ];
 
 export default function HomePage() {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredHubs = portalHubs.filter((hub) =>
-    hub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    hub.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
-    <main className="min-h-screen bg-zinc-950 text-white pt-28 pb-20 px-4 select-none">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <main className="min-h-screen bg-zinc-950 text-white pt-32 pb-20 px-4 select-none">
+      <div className="max-w-7xl mx-auto space-y-16">
         
-        {/* 📢 AD PLACEHOLDER 1: TOP LEADERBOARD BANNER */}
-        <div className="w-full max-w-4xl mx-auto h-[90px] bg-zinc-900/20 border border-dashed border-zinc-900 rounded-xl flex items-center justify-center text-xs font-mono text-zinc-700 tracking-widest">
-          [ DARKSYON_TOP_LEADERBOARD_AD_728X90 ]
-        </div>
-
-        {/* HERO & SEARCH SECTION */}
-        <section className="text-center space-y-6 border-b border-zinc-900 pb-12">
-          <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500">
-            DARK<span className="text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.4)]">SYON</span> MATRIX PORTAL
-          </h1>
-          <p className="text-xs font-mono text-zinc-400 max-w-xl mx-auto">
-            Select a computational domain hub to access specialized client-side and cloud-based operational tools.
-          </p>
-
-          <div className="max-w-xl mx-auto relative group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within:text-zinc-400 transition-colors" />
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search domain hubs..."
-              className="w-full h-12 rounded-xl bg-zinc-900/30 border border-zinc-900 pl-11 pr-4 text-sm font-mono placeholder:text-zinc-700 focus:border-zinc-800 transition-all backdrop-blur-md outline-none"
-            />
+        {/* HERO SECTION */}
+        <section className="text-center space-y-4 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 bg-zinc-900/60 border border-zinc-800 rounded-full px-3 py-1 text-[10px] font-mono tracking-wider uppercase text-zinc-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> Production Engine V2.0
           </div>
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-600 leading-none">
+            DARKSYON PORTAL
+          </h1>
+          <p className="text-xs sm:text-sm font-mono text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+            Universal mathematical matrices and cross-industry utility suites. Built for high-performance responsive computations.
+          </p>
         </section>
 
-        {/* HUBS CATEGORY GRID */}
+        {/* TOP AD BANNER */}
+        <div className="w-full max-w-5xl mx-auto h-[90px] bg-zinc-900/10 border border-dashed border-zinc-900 rounded-2xl flex items-center justify-center text-xs font-mono text-zinc-700 tracking-widest">
+          [ DARKSYON_GLOBAL_HOME_TOP_BANNER_728X90 ]
+        </div>
+
+        {/* CATEGORIES GRID */}
         <section className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-600">
-              Computational Domains ({filteredHubs.length} Active Hubs)
-            </h2>
-          </div>
+          <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-600">
+            System Directories / Select Suite
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredHubs.map((hub) => (
-              <Link 
-                key={hub.id} 
-                href={hub.link} 
-                className={`group border border-zinc-900/80 rounded-2xl p-6 space-y-4 transition-all duration-3xl ${hub.color} ${hub.shadow}`}
+            {toolCategories.map((category) => (
+              <Link
+                key={category.id}
+                href={category.link}
+                className={`group border border-zinc-900/80 bg-zinc-900/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between space-y-6 transition-all duration-300 hover:bg-zinc-900/40 ${category.borderGlow}`}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <hub.icon className="w-6 h-6 text-zinc-500 group-hover:text-zinc-200 transition-colors" />
-                    <h3 className="text-lg font-bold tracking-tight text-zinc-200 group-hover:text-white transition-colors">{hub.title}</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl bg-zinc-950 border border-zinc-900 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
+                      <category.icon className="w-5 h-5" />
+                    </div>
+                    <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${category.tagColor}`}>
+                      {category.count}
+                    </span>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-zinc-700 group-hover:text-zinc-400 group-hover:translate-x-0.5 transition-all" />
+
+                  <div className="space-y-1.5">
+                    <h3 className="text-lg font-bold text-zinc-100 group-hover:text-white transition-colors">
+                      {category.title}
+                    </h3>
+                    <p className="text-xs text-zinc-400 leading-relaxed font-mono">
+                      {category.description}
+                    </p>
+                  </div>
                 </div>
-                
-                <p className="text-xs text-zinc-400 leading-relaxed min-h-[36px]">{hub.description}</p>
-                
-                <div className="border-t border-zinc-900/60 pt-3 text-[10px] font-mono uppercase text-zinc-600 group-hover:text-zinc-400 tracking-wider transition-colors">
-                  Open Category
+
+                <div className="border-t border-zinc-900/60 pt-4 flex items-center gap-1.5 text-[10px] font-mono uppercase text-zinc-600 group-hover:text-zinc-200 transition-colors">
+                  Access Hub Direct <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </Link>
             ))}
-
-            {/* 📢 AD PLACEHOLDER 2: IN-GRID NATIVE ADS CARD */}
-            {filteredHubs.length > 0 && (
-              <div className="border border-zinc-900/40 bg-zinc-900/5 rounded-2xl p-6 flex flex-col items-center justify-center text-center border-dashed text-[11px] font-mono text-zinc-700 min-h-[160px]">
-                <span>[ SPONSORED LINK ]</span>
-              </div>
-            )}
           </div>
-
-          {/* NO RESULTS VIEW */}
-          {filteredHubs.length === 0 && (
-            <div className="text-center py-20 border border-zinc-900 rounded-2xl bg-zinc-950/20 backdrop-blur-md space-y-2 font-mono">
-              <Zap className="w-6 h-6 text-zinc-700 mx-auto" />
-              <p className="text-xs font-bold text-zinc-400">NO HUB MATCHED</p>
-            </div>
-          )}
         </section>
 
-        {/* 📢 AD PLACEHOLDER 3: BOTTOM HORIZONTAL AD UNIT */}
-        <div className="w-full max-w-4xl mx-auto h-[90px] bg-zinc-900/20 border border-dashed border-zinc-900 rounded-xl flex items-center justify-center text-xs font-mono text-zinc-700 tracking-widest mt-12">
-          [ DARKSYON_BOTTOM_BANNER_AD_728X90 ]
+        {/* BOTTOM AD BANNER */}
+        <div className="w-full max-w-5xl mx-auto h-[90px] bg-zinc-900/10 border border-dashed border-zinc-900 rounded-2xl flex items-center justify-center text-xs font-mono text-zinc-700 tracking-widest">
+          [ DARKSYON_GLOBAL_HOME_BOTTOM_BANNER_728X90 ]
         </div>
 
       </div>

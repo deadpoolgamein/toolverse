@@ -1,28 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import { Building2, Search, ChevronRight, ArrowRight, Zap, Flame } from "lucide-react";
+import { 
+  Building2, 
+  Search, 
+  ChevronRight, 
+  ArrowRight, 
+  Gauge, 
+  Cpu, 
+  Scissors, 
+  Activity, 
+  Layers, 
+  Flame,
+  Scale
+} from "lucide-react";
 import Link from "next/link";
-import { Scale, Gauge, Cpu, Scissors, Activity, Layers, Move } from "lucide-react";
 
-
+// 🛠️ POORE 7 flagships INDUSTRIAL TOOLS KI ARRAY LIST
 const industrialToolsList = [
-  {
-    id: "welding-calculator",
-    title: "Welding Parameters Calculator",
-    description: "Compute precise industrial arc parameters, electrode grades, shielding flux, and current variables.",
-    link: "/tools/industrial/welding-calculator", // Sahi path mapping
-    borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
-    icon: Flame
-  },
-  // Baad mein jo dusre pipe miter ya cone tools banayenge wo yahan add hote jayenge
   {
     id: "metal-weight-calculator",
     title: "Metal Weight Calculator",
-    description: "Estimate core weight and volume mass for iron sheets, box pipes, L-angles, and tubes.",
+    description: "Calculate precise physical mass for plate sheet, pipes, box channels and L-angles in Inch-Soot matrix.",
     link: "/tools/industrial/metal-weight-calculator",
     borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
-    icon: Scale // Is component ke top par import { Scale } from "lucide-react" check kar lena bhai!
+    icon: Scale
   },
   {
     id: "drilling-calculator",
@@ -30,7 +32,7 @@ const industrialToolsList = [
     description: "Compute precise industrial RPM limits and mechanical feed metrics for hard alloys.",
     link: "/tools/industrial/drilling-calculator",
     borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
-    icon: Gauge // top par import { Gauge } from "lucide-react" check kar lena!
+    icon: Gauge
   },
   {
     id: "threading-calculator",
@@ -43,34 +45,26 @@ const industrialToolsList = [
   {
     id: "miter-calculator",
     title: "Miter Cut Layout Calculator",
-    description: "Compute precision structural diagonal marking offsets for metal frames and corner layouts.",
+    description: "Compute structural diagonal marking offsets for metal frames and corner cutting layouts.",
     link: "/tools/industrial/miter-calculator",
     borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
     icon: Scissors
   },
   {
-    id: "pipe-notch-calculator",
-    title: "Pipe Notch & Saddle Calculator",
-    description: "Compute structural cut-back layout points for seamless pipe intersection joints.",
-    link: "/tools/industrial/pipe-notch-calculator",
+    id: "pipe-wrap-calculator",
+    title: "Pipe Wrap Template Calculator",
+    description: "Generate 2D paper wrapping strip patterns and markers for complex pipe saddle notch profiling.",
+    link: "/tools/industrial/pipe-wrap-calculator",
     borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
     icon: Activity
-  },
-  {
-    id: "cone-calculator",
-    title: "Cone Flat Layout Pattern Calculator",
-    description: "Develop 2D flat sheets dimensions for industrial hoppers, funnels, and concentric cones.",
-    link: "/tools/industrial/cone-calculator",
-    borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
-    icon: Layers
   },
   {
     id: "staircase-calculator",
-    title: "Staircase Stringer & Slope Estimator",
+    title: "Staircase Slope & Railing Calculator",
     description: "Compute mechanical cutting angles, slopes, and total stringer beam lengths for stairs.",
     link: "/tools/industrial/staircase-calculator",
     borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
-    icon: Activity
+    icon: Building2
   },
   {
     id: "gas-calculator",
@@ -87,17 +81,10 @@ const industrialToolsList = [
     link: "/tools/industrial/bending-calculator",
     borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
     icon: Layers
-  },
-  {
-    id: "pipe-wrap-calculator",
-    title: "Pipe Wrap Template Calculator",
-    description: "Generate 2D paper wrapping strip patterns and markers for complex pipe saddle notch profiling.",
-    link: "/tools/industrial/pipe-wrap-calculator",
-    borderGlow: "hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)]",
-    icon: Move
   }
 ];
 
+// 🚨 YAHAN DEFAULT EXPORT MISSING THA YA TYPO THA - JISE FIXED KAR DIYA HAI
 export default function IndustrialHubPage() {
   const [query, setQuery] = useState("");
 
@@ -110,40 +97,35 @@ export default function IndustrialHubPage() {
     <main className="min-h-screen bg-zinc-950 text-white pt-28 pb-20 px-4 select-none">
       <div className="max-w-7xl mx-auto space-y-12">
         
-        {/* 📢 ADS PLACEHOLDER 1: TOP BANNER */}
-        <div className="w-full max-w-4xl mx-auto h-[90px] bg-zinc-900/20 border border-dashed border-zinc-900 rounded-xl flex items-center justify-center text-xs font-mono text-zinc-700 tracking-widest">
-          [ DARKSYON_INDUSTRIAL_HUB_TOP_AD_728X90 ]
-        </div>
-
-        {/* HEADER SECTION */}
+        {/* HERO TITLE HEADER */}
         <section className="text-center space-y-4 border-b border-zinc-900 pb-10">
           <div className="flex items-center justify-center gap-3">
             <Building2 className="w-8 h-8 text-red-500" />
             <h1 className="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500">
-              Industrial Suite
+              Industrial & Welding Suite
             </h1>
           </div>
           <p className="text-xs font-mono text-zinc-400 max-w-xl mx-auto leading-relaxed">
-            Specialized engineering, fabrication, and metallurgy tools designed for industry professionals.
+            Professional layout modules for heavy fabrication, precise miter cutting, core machining, and mass matrices calculation.
           </p>
 
-          {/* SEARCH BAR */}
+          {/* INTERNAL SEARCH FILTERS */}
           <div className="max-w-xl mx-auto relative group pt-4">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within:text-zinc-400 transition-colors" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within:text-zinc-400" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search industrial tools..."
+              placeholder="Search active industrial modules..."
               className="w-full h-11 rounded-xl bg-zinc-900/30 border border-zinc-900 pl-11 pr-4 text-sm font-mono placeholder:text-zinc-700 focus:border-red-500/30 transition-all backdrop-blur-md outline-none"
             />
           </div>
         </section>
 
-        {/* GRID LAYOUT */}
+        {/* ACTIVE MODULES GRID */}
         <section className="space-y-6">
           <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-600">
-            Active Industrial Modules ({filteredTools.length})
+            Active Industrial Engines ({filteredTools.length})
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -151,37 +133,27 @@ export default function IndustrialHubPage() {
               <Link
                 key={tool.id}
                 href={tool.link}
-                className={`group border border-zinc-900 bg-zinc-900/40 rounded-2xl p-6 space-y-4 transition-all duration-3xl hover:bg-zinc-900/80 ${tool.borderGlow}`}
+                className={`group border border-zinc-900 bg-zinc-900/40 rounded-2xl p-6 space-y-4 transition-all duration-300 hover:bg-zinc-900/80 ${tool.borderGlow}`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <tool.icon className="w-5 h-5 text-zinc-500 group-hover:text-red-400 transition-colors" />
-                    <h3 className="text-md font-bold text-zinc-200 group-hover:text-white transition-colors">{tool.title}</h3>
+                    <h3 className="text-md font-bold text-zinc-200 group-hover:text-white transition-colors">
+                      {tool.title}
+                    </h3>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-zinc-700 group-hover:text-red-400 transition-all" />
+                  <ChevronRight className="w-4 h-4 text-zinc-700 group-hover:text-red-400 transition-transform" />
                 </div>
-                
-                <p className="text-xs text-zinc-400 leading-relaxed min-h-[36px]">{tool.description}</p>
-                
+                <p className="text-xs text-zinc-400 leading-relaxed min-h-[36px]">
+                  {tool.description}
+                </p>
                 <div className="border-t border-zinc-900/60 pt-3 text-[10px] font-mono uppercase text-zinc-600 group-hover:text-red-400 tracking-wider flex items-center gap-1">
-                  Launch Module <ArrowRight className="w-3 h-3" />
+                  Launch Engine <ArrowRight className="w-3 h-3" />
                 </div>
               </Link>
             ))}
-
-            {/* 📢 ADS PLACEHOLDER 2 */}
-            {filteredTools.length > 0 && (
-              <div className="border border-zinc-900/40 bg-zinc-900/5 rounded-2xl p-6 flex flex-col items-center justify-center text-center border-dashed text-[11px] font-mono text-zinc-700 min-h-[160px]">
-                <span>[ SPONSORED PRODUCTION LINK ]</span>
-              </div>
-            )}
           </div>
         </section>
-
-        {/* 📢 ADS PLACEHOLDER 3 */}
-        <div className="w-full max-w-4xl mx-auto h-[90px] bg-zinc-900/20 border border-dashed border-zinc-900 rounded-xl flex items-center justify-center text-xs font-mono text-zinc-700 tracking-widest mt-12">
-          [ DARKSYON_INDUSTRIAL_BOTTOM_AD_728X90 ]
-        </div>
 
       </div>
     </main>
