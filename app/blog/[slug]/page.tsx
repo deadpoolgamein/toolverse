@@ -13,7 +13,7 @@ interface Blog {
 }
 // 🚀 FORCE NEXT.JS TO BYPASS STATIC CACHE AND FETCH FRESH DATA ON EVERY CLICK
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
+
 
 
 
