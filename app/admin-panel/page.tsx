@@ -42,7 +42,7 @@ export default function AdminPanel() {
     }
   };
 
-  // --- LIVE SUPABASE CLOUD PUBLISH HANDLER ---
+  // --- LIVE SUPABASE CLOUD PUBLISH HANDLER WITH AUTO-SLUG MATRIX ---
   const handlePublishBlog = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -53,19 +53,39 @@ export default function AdminPanel() {
 
     setBlogStatus("⚡ Syncing payload with Cloud Cluster...");
 
+    // 🧠 AUTOMATIC SLUG GENERATOR ENGINE
+    // Automatically transforms "How To Compress Image" -> "how-to-compress-image"
+    const generatedSlug = newTitle
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "") // Remove special characters
+      .replace(/[\s_]+/g, "-")  // Replace spaces and underscores with dashes
+      .replace(/^-+|-+$/g, ""); // Clean trailing edge hyphens
+
     try {
-      // Supabase ke 'blogs' table mein automatic insert operation
+      // Supabase insertion structure with safe column routing mappings
       const { data, error } = await supabase
         .from("blogs")
         .insert([
           { 
             title: newTitle, 
             description: newDesc, 
-            content: newContent || newDesc 
+            content: newContent || newDesc,
+            slug: generatedSlug // Safely commits the computed routing slug column
           }
-        ]);
+        ])
+        .select(); // Appends select tracker to bypass network empty object returns
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase Payload Error Breakdown:", {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code
+        });
+        setBlogStatus(`❌ DATABASE REJECTION: ${error.message} (Code: ${error.code})`);
+        return;
+      }
 
       setBlogStatus("🚀 TRANSMISSION SUCCESSFUL: Live on Global Cloud Nodes!");
       
@@ -75,7 +95,7 @@ export default function AdminPanel() {
       setNewContent("");
 
     } catch (error: any) {
-      console.error("Cloud Error:", error);
+      console.error("System Fatal Catch Exception:", error);
       setBlogStatus(`❌ MATRIX BREAK: ${error.message || "Database network timeout"}`);
     }
   };
@@ -136,7 +156,7 @@ export default function AdminPanel() {
                     type="text"
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
-                    placeholder="e.g., The Death of Bloated AI: Micro-Utilities in 2026"
+                    placeholder="e.g., How To Compress Image"
                     className="w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 rounded-xl px-4 py-3 text-sm text-zinc-200 outline-none font-sans transition-all"
                   />
                 </div>
@@ -164,7 +184,7 @@ export default function AdminPanel() {
                 </div>
 
                 {blogStatus && (
-                  <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl font-mono text-[11px] text-red-400 animate-pulse">
+                  <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl font-mono text-[11px] text-zinc-300">
                     {blogStatus}
                   </div>
                 )}

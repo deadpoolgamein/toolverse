@@ -1,21 +1,37 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { 
   Building2, 
   Zap, 
   Hammer, 
   HardHat, 
   ArrowRight, 
-  Video, // Make sure to import Video from lucide-react
-
+  Video, 
   Bot, 
   Calculator, 
-  Image as ImageIcon, 
-  Wrench 
+  ImageIcon as ImageIcon, 
+  Wrench,
+  Sparkles,
+  BookOpen,
+  Calendar
 } from "lucide-react";
 import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
 
-// 🗂️ ABSOLUTE CORE DIRECTORY MAPPING (8 CATEGORIES BASED ON PROJECT ROOT)
+// Initialize temporary local client mapping to secure metadata streams
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+interface Blog {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  created_at: string;
+}
+
 const toolCategories = [
   {
     id: "industrial",
@@ -102,7 +118,7 @@ const toolCategories = [
     title: "Video Processing Suite",
     description: "High-performance client-side video background removal, real-time filters, and layout manipulation modules.",
     link: "/tools/video",
-    icon: Video, // Import Video from lucide-react at the top if not there
+    icon: Video,
     count: "New Suite",
     borderGlow: "hover:border-sky-500/30 hover:shadow-[0_0_40px_rgba(14,165,233,0.15)]",
     tagColor: "bg-sky-500/10 text-sky-400 border-sky-500/20"
@@ -110,6 +126,33 @@ const toolCategories = [
 ];
 
 export default function HomePage() {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  // 🌐 FETCH RANDOM BLOGS FROM ADMIN PANEL DATABASE
+  useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        if (!supabaseUrl || !supabaseAnonKey) {
+          setLoading(false);
+          return;
+        }
+        const { data, error } = await supabase
+          .from("blogs")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(3); // Shows latest 3 dynamic posts to crawler
+
+        if (data) setBlogs(data);
+      } catch (err) {
+        console.error("Database fetch locked", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchBlogs();
+  }, []);
+
   return (
     <main className="min-h-screen bg-zinc-950 text-white pt-32 pb-20 px-4 select-none">
       <div className="max-w-7xl mx-auto space-y-16">
@@ -171,6 +214,59 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </section>
+
+        {/* 📚 NEW DYNAMIC SECTION: RANDOM BLOGS ADMIN PANEL DISPATCHER */}
+        <section className="space-y-6 pt-10 border-t border-zinc-900">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-600 flex items-center gap-1.5">
+              <BookOpen className="w-4 h-4 text-sky-400" /> Knowledge Base / Random Publications
+            </h2>
+            <Link 
+              href="/blog" 
+              className="text-[10px] font-mono uppercase text-zinc-400 hover:text-sky-400 transition-colors flex items-center gap-1"
+            >
+              View All Posts <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((n) => (
+                <div key={n} className="h-44 rounded-2xl bg-zinc-900/20 border border-zinc-900/60 animate-pulse" />
+              ))}
+            </div>
+          ) : blogs.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {blogs.map((post) => (
+                <Link 
+                  key={post.id} 
+                  href={`/blog/${post.slug}`}
+                  className="group border border-zinc-900 bg-zinc-900/10 hover:bg-zinc-900/30 p-5 rounded-2xl flex flex-col justify-between space-y-4 hover:border-sky-500/20 transition-all duration-300"
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-center gap-2 text-[9px] font-mono text-zinc-500 uppercase">
+                      <Calendar className="w-3 h-3 text-zinc-600" />
+                      {new Date(post.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                    </div>
+                    <h3 className="text-sm font-bold text-zinc-200 group-hover:text-sky-400 transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-[11px] font-mono text-zinc-500 line-clamp-3 leading-relaxed">
+                      {post.content.replace(/[#*`\-]/g, "")}
+                    </p>
+                  </div>
+                  <div className="text-[9px] font-mono text-zinc-600 uppercase group-hover:text-zinc-300 transition-colors pt-2 border-t border-zinc-900 flex items-center gap-1">
+                    Read Article <ArrowRight className="w-2.5 h-2.5" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center font-mono text-zinc-700 text-xs py-10 border border-dashed border-zinc-900 rounded-2xl">
+              [ NO RANDOM PUBLICATIONS DISPATCHED YET - LOGIN TO ADMIN PANEL TO POST ]
+            </div>
+          )}
         </section>
 
         {/* BOTTOM AD BANNER */}

@@ -46,7 +46,7 @@ export default function AgeArticle() {
               </div>
             </div>
             <a
-              href="/tools/age-calculator"
+              href="/tools/calculators/age-calculator"
               className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 font-bold bg-red-600 hover:bg-red-700 text-white text-sm rounded-xl transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)] group active:scale-95 whitespace-nowrap"
             >
               Launch Tool

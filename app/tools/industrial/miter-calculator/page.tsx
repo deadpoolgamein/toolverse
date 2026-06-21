@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sliders, HelpCircle, Scissors, ShieldAlert } from "lucide-react";
+import { Sliders, HelpCircle, Scissors, ShieldAlert, Sparkles } from "lucide-react";
 
 export default function MiterCalculator() {
   const [unitSystem, setUnitSystem] = useState("metric"); // metric (mm) vs imperial (inch)
@@ -165,6 +165,26 @@ export default function MiterCalculator() {
                   Measure the computed distance (X) from the extreme edge of your profile and place a point. Draw a straight diagonal scribed line from that point back to the zero corner edge, then execute your chop-saw blade cut along that vector path.
                 </div>
               </div>
+              {/* 📚 ADSENSE COMPLIANCE: MITER INSIGHTS */}
+<section className="mt-12 border-t border-zinc-900 pt-10 space-y-6 max-w-4xl mx-auto">
+  <div className="space-y-2">
+    <h2 className="text-lg font-black tracking-tight text-zinc-100 flex items-center gap-2">
+      <Sparkles className="w-4 h-4 text-sky-400" /> Angular Miter Joint Cutting Grid Optimizers
+    </h2>
+    <p className="text-xs font-mono text-zinc-400 leading-relaxed">
+      Our spatial carpentry miter script computes exact saw blade angles for multi-sided frame intersections. Balancing wall angles against corner parameters, it generates precise cutting steps to ensure seamless joint fits.
+    </p>
+  </div>
+  <div className="pt-4 border-t border-dashed border-zinc-900/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div className="text-left space-y-0.5">
+      <h4 className="text-xs font-bold font-mono text-zinc-400 uppercase tracking-wide">Need Step-by-Step Instructions?</h4>
+      <p className="text-[10px] text-zinc-600 font-mono">Learn how composite angles align crown moldings and raw framing structures cleanly.</p>
+    </div>
+    <a href="/blog/miter-joint-cutting-angles" className="w-full md:w-auto h-11 px-6 flex-shrink-0 rounded-xl bg-gradient-to-r from-sky-500/10 to-indigo-500/10 border border-sky-500/20 hover:border-sky-500/40 text-sky-400 font-mono font-bold text-xs flex items-center justify-center gap-2 transition-all whitespace-nowrap">
+      <Sparkles className="w-3.5 h-3.5" /> READ THE COMPLETE GUIDE
+    </a>
+  </div>
+</section>
             </div>
 
             {/* AD SPACE BASEMENT */}

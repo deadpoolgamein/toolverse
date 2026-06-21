@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sliders, HelpCircle, Activity } from "lucide-react";
+import { Sliders, HelpCircle, Activity, Sparkles } from "lucide-react";
 
 export default function StaircaseCalculator() {
   const [unitSystem, setUnitSystem] = useState("metric");
@@ -110,6 +110,26 @@ export default function StaircaseCalculator() {
                 </div>
               </div>
             </div>
+            {/* 📚 ADSENSE COMPLIANCE: STAIRCASE INSIGHTS */}
+<section className="mt-12 border-t border-zinc-900 pt-10 space-y-6 max-w-4xl mx-auto">
+  <div className="space-y-2">
+    <h2 className="text-lg font-black tracking-tight text-zinc-100 flex items-center gap-2">
+      <Sparkles className="w-4 h-4 text-sky-400" /> Architectural Stair Stringer Dimension Engines
+    </h2>
+    <p className="text-xs font-mono text-zinc-400 leading-relaxed">
+      This construction framework calculates architectural staircase layouts, riser heights, and run depths. By optimizing dimensional configurations against standard safety codes, it matches stringer inclines with total elevation bounds.
+    </p>
+  </div>
+  <div className="pt-4 border-t border-dashed border-zinc-900/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div className="text-left space-y-0.5">
+      <h4 className="text-xs font-bold font-mono text-zinc-400 uppercase tracking-wide">Need Step-by-Step Instructions?</h4>
+      <p className="text-[10px] text-zinc-600 font-mono">Master safety building compliance rules that dictate comfortable step rise ratios.</p>
+    </div>
+    <a href="/blog/staircase-tread-stringer-guide" className="w-full md:w-auto h-11 px-6 flex-shrink-0 rounded-xl bg-gradient-to-r from-sky-500/10 to-indigo-500/10 border border-sky-500/20 hover:border-sky-500/40 text-sky-400 font-mono font-bold text-xs flex items-center justify-center gap-2 transition-all whitespace-nowrap">
+      <Sparkles className="w-3.5 h-3.5" /> READ THE COMPLETE GUIDE
+    </a>
+  </div>
+</section>
             <div className="w-full h-14 bg-zinc-900/10 border border-dashed border-zinc-900 rounded-xl flex items-center justify-center text-[10px] font-mono text-zinc-700 tracking-wider mt-6">
               [ NATIVE_BOARD_AD_SPACE ]
             </div>

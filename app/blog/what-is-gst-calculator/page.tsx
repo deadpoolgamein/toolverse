@@ -40,7 +40,7 @@ export default function GstArticle() {
                 <p className="text-zinc-400 text-xs sm:text-sm">Compute net values, gross tax amounts, and multi-percentage slabs with single-click algorithms.</p>
               </div>
             </div>
-            <a href="/tools/gst-calculator" className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 font-bold bg-red-600 hover:bg-red-700 text-white text-sm rounded-xl transition-all group active:scale-95 whitespace-nowrap">
+            <a href="/tools/calculators/gst-calculator" className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 font-bold bg-red-600 hover:bg-red-700 text-white text-sm rounded-xl transition-all group active:scale-95 whitespace-nowrap">
               Calculate GST <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>

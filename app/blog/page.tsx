@@ -1,90 +1,97 @@
 "use client";
 
-export default function Blog() {
-  // Aapke actual folder structure ke mutabik blogs ki list
-  const blogs = [
-    {
-      title: "How to Calculate Age Accurately Online",
-      desc: "Learn the step-by-step method to calculate precise age, leaps years, and months using our free digital tools.",
-      category: "Guides",
-      date: "June 2026",
-      link: "/blog/how-to-calculate-age"
-    },
-    {
-      title: "How to Compress Images Online Without Losing Quality",
-      desc: "A complete guide for gamers and developers to reduce image sizes layout assets quickly for web upload.",
-      category: "Image Tools",
-      date: "June 2026",
-      link: "/blog/how-to-compress-images-online"
-    },
-    {
-      title: "SIP vs Lumpsum Investment: Which is Better for You?",
-      desc: "An in-depth analysis of systematic investment plans versus one-time lumpsum investments with calculator metrics.",
-      category: "Finance",
-      date: "May 2026",
-      link: "/blog/sip-vs-lumpsum-investment"
-    },
-    {
-      title: "What is GST Calculator and How to Use It?",
-      desc: "Understand net and gross tax calculations easily with clear structural breakdowns for businesses.",
-      category: "Calculators",
-      date: "May 2026",
-      link: "/blog/what-is-gst-calculator"
+import { useState, useEffect } from "react";
+import { BookOpen, ArrowRight, Calendar, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+interface Blog {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  created_at: string;
+}
+
+export default function BlogListPage() {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchAllPublications() {
+      try {
+        if (!supabaseUrl || !supabaseAnonKey) return;
+        const { data, error } = await supabase
+          .from("blogs")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (data) setBlogs(data);
+      } catch (err) {
+        console.error("Central repository locked", err);
+      } finally {
+        setLoading(false);
+      }
     }
-  ];
+    fetchAllPublications();
+  }, []);
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white font-sans pt-20">
-      <div className="max-w-6xl mx-auto px-6 py-16">
+    <main className="min-h-screen bg-zinc-950 text-white pt-32 pb-20 px-4 select-none">
+      <div className="max-w-5xl mx-auto space-y-10">
         
-        {/* Header Section */}
-        <div className="text-center md:text-left mb-12">
-          <h1 className="text-4xl font-black tracking-tight mb-2">
-            Darksyon <span className="text-red-500">Insights</span>
+        {/* HEADER AREA */}
+        <div className="space-y-2 border-b border-zinc-900 pb-6">
+          <h1 className="text-3xl font-black tracking-tight text-zinc-100 flex items-center gap-2">
+            <BookOpen className="w-8 h-8 text-sky-400" /> Central Knowledge Publication Matrix
           </h1>
-          <p className="text-zinc-500 text-sm">
-            SEO-Optimized Tech Guides, Gaming Tutorials, and Financial Walkthroughs.
+          <p className="text-xs font-mono text-zinc-400 mt-1">
+            Deep-dive operational manuals, mathematical documentations, and programmatic structural tutorials.
           </p>
         </div>
 
-        {/* --- FUTURE ADSENSE SLOT (TOP BANNER) --- */}
-        <div className="w-full h-24 bg-zinc-900/30 border border-zinc-900 rounded-xl mb-12 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase">
-          [ Ad Space - Top Banner ]
-        </div>
-
-        {/* Blog Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogs.map((post, index) => (
-            <a 
-              key={index} 
-              href={post.link}
-              className="group bg-zinc-900/30 border border-zinc-900 rounded-2xl p-6 flex flex-col justify-between hover:bg-zinc-900/70 hover:border-red-500/20 transition-all duration-200 shadow-lg"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider uppercase bg-red-500/10 text-red-500 border border-red-500/20">
-                    {post.category}
-                  </span>
-                  <span className="text-xs font-mono text-zinc-600">{post.date}</span>
+        {/* MAIN LIST INDEX */}
+        {loading ? (
+          <div className="space-y-4">
+            {Array.from({ length: 4 }).map((_, n) => (
+              <div key={n} className="h-28 rounded-2xl bg-zinc-900/20 border border-zinc-900/60 animate-pulse" />
+            ))}
+          </div>
+        ) : blogs.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {blogs.map((post) => (
+              <Link 
+                key={post.id}
+                href={`/blog/${post.slug}`}
+                className="group border border-zinc-900 bg-zinc-900/10 hover:bg-zinc-900/30 p-6 rounded-2xl flex flex-col justify-between space-y-4 hover:border-sky-500/20 transition-all duration-300"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-[9px] font-mono text-zinc-500 uppercase">
+                    <Calendar className="w-3 h-3 text-zinc-600" />
+                    {new Date(post.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-200 group-hover:text-sky-400 transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-xs font-mono text-zinc-500 line-clamp-2 leading-relaxed">
+                    {post.content.replace(/[#*`\-]/g, "")}
+                  </p>
                 </div>
-                <h2 className="text-lg font-bold text-zinc-200 group-hover:text-white transition-colors mb-2 leading-snug">
-                  {post.title}
-                </h2>
-                <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-6">
-                  {post.desc}
-                </p>
-              </div>
-              <span className="text-xs font-bold text-red-500/80 group-hover:text-red-500 transition-colors flex items-center gap-1">
-                Read Article <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-              </span>
-            </a>
-          ))}
-        </div>
-
-        {/* --- FUTURE ADSENSE SLOT (BOTTOM BANNER) --- */}
-        <div className="w-full h-28 bg-zinc-900/30 border border-zinc-900 rounded-xl mt-12 flex items-center justify-center text-xs font-mono text-zinc-600 tracking-widest uppercase">
-          [ Ad Space - Bottom Banner ]
-        </div>
+                <div className="text-[10px] font-mono text-zinc-600 uppercase group-hover:text-zinc-300 transition-colors pt-3 border-t border-zinc-900/60 flex items-center gap-1">
+                  Open Publication Document <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center font-mono text-zinc-700 text-xs py-16 border border-dashed border-zinc-900 rounded-2xl">
+            [ SECURE DATABASE INVENTORIES CURRENTLY EMPTY - TRANSMIT ENTRIES FROM THE PANEL ]
+          </div>
+        )}
 
       </div>
     </main>

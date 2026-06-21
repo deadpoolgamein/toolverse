@@ -175,6 +175,30 @@ export default function SIPCalculator() {
               </div>
             </div>
           )}
+          {/* 📚 ADSENSE COMPLIANCE: INVESTMENT CALCULATOR INSIGHTS */}
+<section className="mt-12 border-t border-zinc-900 pt-10 space-y-6 max-w-4xl mx-auto">
+  <div className="space-y-2">
+    <h2 className="text-lg font-black tracking-tight text-zinc-100 flex items-center gap-2">
+      <Sparkles className="w-4 h-4 text-sky-400" /> Compound Interest Wealth Projections
+    </h2>
+    <p className="text-xs font-mono text-zinc-400 leading-relaxed">
+      This utility executes comparative estimations between Systematic Investment Plans and standard lump-sum asset integrations. Using recursive geometric compounding loops, it delivers accurate future value matrices over custom operational terms for precise wealth analysis.
+    </p>
+  </div>
+
+  <div className="pt-4 border-t border-dashed border-zinc-900/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div className="text-left space-y-0.5">
+      <h4 className="text-xs font-bold font-mono text-zinc-400 uppercase tracking-wide">Need Step-by-Step Instructions?</h4>
+      <p className="text-[10px] text-zinc-600 font-mono">Analyze systematic yield frequencies and asset velocity compound structures.</p>
+    </div>
+    <a 
+      href="/blog/sip-vs-lumpsum-investment"
+      className="w-full md:w-auto h-11 px-6 flex-shrink-0 rounded-xl bg-gradient-to-r from-sky-500/10 to-indigo-500/10 border border-sky-500/20 hover:border-sky-500/40 text-sky-400 font-mono font-bold text-xs flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(14,165,233,0.05)] transition-all whitespace-nowrap"
+    >
+      <Sparkles className="w-3.5 h-3.5" /> READ THE COMPLETE GUIDE
+    </a>
+  </div>
+</section>
 
         </div>
       </div>

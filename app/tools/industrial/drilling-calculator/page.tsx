@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sliders, HelpCircle, Activity, Gauge } from "lucide-react";
+import { Sliders, HelpCircle, Activity, Gauge, Sparkles } from "lucide-react";
 
 // STANDARD CUTTING SPEED MATRIX (Vc in m/min) BASED ON MATERIAL & BIT TYPE
 const cuttingSpeeds: Record<string, Record<string, number>> = {
@@ -189,6 +189,26 @@ export default function DrillingCalculator() {
                   Always deploy standard fluid soluble oil emulsions or active cutting coolants when machining Stainless Steel (SS) or Cast Iron to avoid immediate structural thermal breakdown of the drill cutting edge.
                 </div>
               </div>
+              {/* 📚 ADSENSE COMPLIANCE: DRILL SPEED AND FEED INSIGHTS */}
+<section className="mt-12 border-t border-zinc-900 pt-10 space-y-6 max-w-4xl mx-auto">
+  <div className="space-y-2">
+    <h2 className="text-lg font-black tracking-tight text-zinc-100 flex items-center gap-2">
+      <Sparkles className="w-4 h-4 text-sky-400" /> Rotational Velocity and Cutting Feed Rate Analytics
+    </h2>
+    <p className="text-xs font-mono text-zinc-400 leading-relaxed">
+      This industrial machining calculator evaluates two core parameters: Spindle Speed (RPM) and Feed Rate (mm/min or IPM). By binding standard Surface Feet per Minute (SFM) or Cutting Speed (V_c) constants against tooling diameters and feed-per-revolution indices locally in your browser thread, it optimizes CNC cutting feed efficiency while preventing tool breakage with zero external data processing lag.
+    </p>
+  </div>
+  <div className="pt-4 border-t border-dashed border-zinc-900/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div className="text-left space-y-0.5">
+      <h4 className="text-xs font-bold font-mono text-zinc-400 uppercase tracking-wide">Need Step-by-Step Instructions?</h4>
+      <p className="text-[10px] text-zinc-600 font-mono">Master how material hardness ratings change cutting speeds and rotational calculations.</p>
+    </div>
+    <a href="/blog/drill-speed-and-feed-guide" className="w-full md:w-auto h-11 px-6 flex-shrink-0 rounded-xl bg-gradient-to-r from-sky-500/10 to-indigo-500/10 border border-sky-500/20 hover:border-sky-500/40 text-sky-400 font-mono font-bold text-xs flex items-center justify-center gap-2 transition-all whitespace-nowrap">
+      <Sparkles className="w-3.5 h-3.5" /> READ THE COMPLETE GUIDE
+    </a>
+  </div>
+</section>
             </div>
 
             {/* AD SPACE */}

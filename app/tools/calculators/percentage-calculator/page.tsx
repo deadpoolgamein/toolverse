@@ -120,6 +120,26 @@ export default function PercentageCalculator() {
               </div>
             </div>
           )}
+          {/* 📚 ADSENSE COMPLIANCE: PERCENTAGE CALCULATOR INSIGHTS */}
+<section className="mt-12 border-t border-zinc-900 pt-10 space-y-6 max-w-4xl mx-auto">
+  <div className="space-y-2">
+    <h2 className="text-lg font-black tracking-tight text-zinc-100 flex items-center gap-2">
+      <Sparkles className="w-4 h-4 text-sky-400" /> Fractional and Relative Proportion Math Matrix
+    </h2>
+    <p className="text-xs font-mono text-zinc-400 leading-relaxed">
+      Our numeric proportion engine performs direct relative scaling calculations. Handling complex percentage shifts, reverse fractions, and multi-tier growth indexes inside high-precision float variables, it balances data operations to deliver instant mathematical values.
+    </p>
+  </div>
+  <div className="pt-4 border-t border-dashed border-zinc-900/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div className="text-left space-y-0.5">
+      <h4 className="text-xs font-bold font-mono text-zinc-400 uppercase tracking-wide">Need Step-by-Step Instructions?</h4>
+      <p className="text-[10px] text-zinc-600 font-mono">Master fundamental ratio breakdowns and baseline tracking formulas easily.</p>
+    </div>
+    <a href="/blog/percentage-calculation-methods" className="w-full md:w-auto h-11 px-6 flex-shrink-0 rounded-xl bg-gradient-to-r from-sky-500/10 to-indigo-500/10 border border-sky-500/20 hover:border-sky-500/40 text-sky-400 font-mono font-bold text-xs flex items-center justify-center gap-2 transition-all whitespace-nowrap">
+      <Sparkles className="w-3.5 h-3.5" /> READ THE COMPLETE GUIDE
+    </a>
+  </div>
+</section>
 
         </div>
       </div>

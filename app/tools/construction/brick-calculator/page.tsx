@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sliders, HelpCircle, ShieldCheck, HardHat } from "lucide-react";
+import { Sliders, HelpCircle, ShieldCheck, HardHat, Sparkles } from "lucide-react";
 
 export default function BrickCalculator() {
   const [wallLength, setWallLength] = useState<number>(10); // Feet
@@ -125,7 +125,27 @@ export default function BrickCalculator() {
                   <span className="font-bold block uppercase text-[10px] text-zinc-500 tracking-wide mb-0.5">Engineering Specifications</span>
                   Estimates use a standard **1:6 Mortar Mix Ratio** (1 Bag Cement mixed with 6 parts Sand). Calculation parameters automatically include an integrated 5% dynamic material wastage margin buffer for standard brick structural layers.
                 </div>
+                {/* 📚 ADSENSE COMPLIANCE: BRICK CALCULATOR INSIGHTS */}
               </div>
+              <section className="mt-12 border-t border-zinc-900 pt-10 space-y-6 max-w-4xl mx-auto">
+  <div className="space-y-2">
+    <h2 className="text-lg font-black tracking-tight text-zinc-100 flex items-center gap-2">
+      <Sparkles className="w-4 h-4 text-sky-400" /> Structural Masonry and Material Volume Estimators
+    </h2>
+    <p className="text-xs font-mono text-zinc-400 leading-relaxed">
+      Our structural civil engineering engine estimates exact brick counts and mortar volume requirements for custom masonry walls. By computing surface area dimensions against standard brick sizing profiles and accounting for custom mortar joint thickness parameters ($inch/mm$) locally in your browser thread, it eliminates material procurement overheads with zero backend database processing dependencies.
+    </p>
+  </div>
+  <div className="pt-4 border-t border-dashed border-zinc-900/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div className="text-left space-y-0.5">
+      <h4 className="text-xs font-bold font-mono text-zinc-400 uppercase tracking-wide">Need Step-by-Step Instructions?</h4>
+      <p className="text-[10px] text-zinc-600 font-mono">Learn how wastage multipliers and standard volumetric metrics map out real-world construction layouts.</p>
+    </div>
+    <a href="/blog/masonry-brick-calculation-guide" className="w-full md:w-auto h-11 px-6 flex-shrink-0 rounded-xl bg-gradient-to-r from-sky-500/10 to-indigo-500/10 border border-sky-500/20 hover:border-sky-500/40 text-sky-400 font-mono font-bold text-xs flex items-center justify-center gap-2 transition-all whitespace-nowrap">
+      <Sparkles className="w-3.5 h-3.5" /> READ THE COMPLETE GUIDE
+    </a>
+  </div>
+</section>
             </div>
 
             <div className="w-full h-14 bg-zinc-900/10 border border-dashed border-zinc-900 rounded-xl flex items-center justify-center text-[10px] font-mono text-zinc-700 tracking-wider mt-6">
