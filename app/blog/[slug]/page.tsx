@@ -3,17 +3,19 @@
 import { useState, useEffect, use } from "react";
 import { ArrowLeft, Calendar, BookOpen, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { supabase } from "@/app/supabaseClient"; // Aapka standard client import path
+// ... baki ke saare purane imports waise hi chalne dein
 
 interface Blog {
   title: string;
   content: string;
   created_at: string;
 }
+// 🚀 FORCE NEXT.JS TO BYPASS STATIC CACHE AND FETCH FRESH DATA ON EVERY CLICK
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+
 
 export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
