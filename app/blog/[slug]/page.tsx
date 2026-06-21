@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Calendar, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { supabase } from "@/app/supabaseClient";
+import { useParams } from "next/navigation"; // 🚀 Built-in Next.js parameter hook for client components
 import Markdown from "react-markdown";
 
 interface Blog {
@@ -12,16 +13,22 @@ interface Blog {
   created_at: string;
 }
 
-export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
+export default function DynamicBlogViewer() {
+  const routerParams = useParams(); // 🧠 Fetch routing tokens directly without relying on async promises
+  const rawSlug = routerParams?.slug;
+  
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchBlogData() {
+      if (!rawSlug) return;
+      
       try {
-        // 🧠 Safely decode url tokens to prevent space/hyphen routing drops on production
-        const decodedSlug = decodeURIComponent(resolvedParams.slug);
+        // Ensure slug string format parsing is completely safe
+        const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
+        if (!currentSlug) return;
+        const decodedSlug = decodeURIComponent(currentSlug);
 
         const { data, error } = await supabase
           .from("blogs")
@@ -32,19 +39,17 @@ export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: 
         if (data) {
           setBlog(data);
         } else if (error) {
-          console.error("Supabase dynamic lookup anomaly:", error.message);
+          console.error("Supabase data mapping anomaly:", error.message);
         }
       } catch (err) {
-        console.error("Failed to read routing parameters", err);
+        console.error("Failed to compile database pipeline stream", err);
       } finally {
         setLoading(false);
       }
     }
-    
-    if (resolvedParams?.slug) {
-      fetchBlogData();
-    }
-  }, [resolvedParams.slug]);
+
+    fetchBlogData();
+  }, [rawSlug]);
 
   if (loading) {
     return (
@@ -58,10 +63,12 @@ export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: 
   }
 
   if (!blog) {
+    const fallbackSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "UNKNOWN_NODE";
+    const decodedFallback = typeof fallbackSlug === "string" ? decodeURIComponent(fallbackSlug) : "UNKNOWN_NODE";
     return (
       <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center font-mono space-y-4 p-4 text-center">
         <div className="text-zinc-600 text-xs uppercase tracking-widest">[ 404 - CORE PUBLICATION NOT DETECTED ]</div>
-        <p className="text-[10px] text-zinc-700 uppercase tracking-wider">Target Node Missing: {decodeURIComponent(resolvedParams.slug)}</p>
+        <p className="text-[10px] text-zinc-700 uppercase tracking-wider">Target Node Missing: {decodedFallback}</p>
         <Link href="/" className="text-xs text-sky-400 border border-sky-500/20 bg-sky-500/5 px-4 py-2 rounded-xl hover:bg-sky-500/10 transition-colors">
           Return To Secure Terminal
         </Link>
@@ -95,7 +102,7 @@ export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: 
           </h1>
         </div>
 
-        {/* RENDERED ARTICLE INJECTOR SECTION WITH MARKDOWN SUPPORT */}
+        {/* RENDERED ARTICLE INJECTOR SECTION */}
         <article className="font-sans text-sm text-zinc-300 leading-relaxed space-y-4 selection:bg-sky-500/20 prose prose-invert max-w-none">
           <Markdown>{blog.content}</Markdown>
         </article>
