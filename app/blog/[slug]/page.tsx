@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, Calendar, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { supabase } from "@/app/supabaseClient";
-import { useParams } from "next/navigation"; // 🚀 Built-in Next.js parameter hook for client components
+import { useParams } from "next/navigation";
 import Markdown from "react-markdown";
 
 interface Blog {
@@ -14,7 +14,7 @@ interface Blog {
 }
 
 export default function DynamicBlogViewer() {
-  const routerParams = useParams(); // 🧠 Fetch routing tokens directly without relying on async promises
+  const routerParams = useParams();
   const rawSlug = routerParams?.slug;
   
   const [blog, setBlog] = useState<Blog | null>(null);
@@ -25,10 +25,9 @@ export default function DynamicBlogViewer() {
       if (!rawSlug) return;
       
       try {
-        // Ensure slug string format parsing is completely safe
-        const currentSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
-        if (!currentSlug) return;
-        const decodedSlug = decodeURIComponent(currentSlug);
+        // 🧠 TypeScript Fix: Explicitly ensuring target variable is a strict primitive string
+        const currentSlug: string = Array.isArray(rawSlug) ? rawSlug[0] ?? "" : rawSlug;
+        const decodedSlug = decodeURIComponent(currentSlug).toLowerCase();
 
         const { data, error } = await supabase
           .from("blogs")
@@ -62,13 +61,14 @@ export default function DynamicBlogViewer() {
     );
   }
 
+  // 🧠 TypeScript Fix for Fallback Rendering parameters
+  const activeFallback: string = Array.isArray(rawSlug) ? rawSlug[0] ?? "UNKNOWN_NODE" : rawSlug ?? "UNKNOWN_NODE";
+
   if (!blog) {
-    const fallbackSlug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || "UNKNOWN_NODE";
-    const decodedFallback = typeof fallbackSlug === "string" ? decodeURIComponent(fallbackSlug) : "UNKNOWN_NODE";
     return (
       <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center font-mono space-y-4 p-4 text-center">
         <div className="text-zinc-600 text-xs uppercase tracking-widest">[ 404 - CORE PUBLICATION NOT DETECTED ]</div>
-        <p className="text-[10px] text-zinc-700 uppercase tracking-wider">Target Node Missing: {decodedFallback}</p>
+        <p className="text-[10px] text-zinc-700 uppercase tracking-wider">Target Node Missing: {decodeURIComponent(activeFallback).toLowerCase()}</p>
         <Link href="/" className="text-xs text-sky-400 border border-sky-500/20 bg-sky-500/5 px-4 py-2 rounded-xl hover:bg-sky-500/10 transition-colors">
           Return To Secure Terminal
         </Link>
