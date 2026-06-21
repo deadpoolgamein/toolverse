@@ -1,21 +1,16 @@
 "use client";
 
 import { useState, useEffect, use } from "react";
-import { ArrowLeft, Calendar, BookOpen, Clock, Sparkles } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { supabase } from "@/app/supabaseClient"; // Aapka standard client import path
-// ... baki ke saare purane imports waise hi chalne dein
+import { supabase } from "@/app/supabaseClient";
+import Markdown from "react-markdown";
 
 interface Blog {
   title: string;
   content: string;
   created_at: string;
 }
-// 🚀 FORCE NEXT.JS TO BYPASS STATIC CACHE AND FETCH FRESH DATA ON EVERY CLICK
-export const dynamic = "force-dynamic";
-
-
-
 
 export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
@@ -25,34 +20,48 @@ export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: 
   useEffect(() => {
     async function fetchBlogData() {
       try {
+        // 🧠 Safely decode url tokens to prevent space/hyphen routing drops on production
+        const decodedSlug = decodeURIComponent(resolvedParams.slug);
+
         const { data, error } = await supabase
           .from("blogs")
           .select("*")
-          .eq("slug", resolvedParams.slug)
+          .eq("slug", decodedSlug)
           .single();
 
-        if (data) setBlog(data);
+        if (data) {
+          setBlog(data);
+        } else if (error) {
+          console.error("Supabase dynamic lookup anomaly:", error.message);
+        }
       } catch (err) {
         console.error("Failed to read routing parameters", err);
       } finally {
         setLoading(false);
       }
     }
-    fetchBlogData();
+    
+    if (resolvedParams?.slug) {
+      fetchBlogData();
+    }
   }, [resolvedParams.slug]);
 
   if (loading) {
     return (
       <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center font-mono text-xs">
-        <div className="animate-pulse tracking-widest uppercase text-zinc-500">Syncing Dynamic Metadata Stream...</div>
+        <div className="tracking-widest uppercase text-zinc-500 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-sky-500 animate-ping" />
+          Syncing Dynamic Metadata Stream...
+        </div>
       </div>
     );
   }
 
   if (!blog) {
     return (
-      <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center font-mono space-y-4">
+      <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center font-mono space-y-4 p-4 text-center">
         <div className="text-zinc-600 text-xs uppercase tracking-widest">[ 404 - CORE PUBLICATION NOT DETECTED ]</div>
+        <p className="text-[10px] text-zinc-700 uppercase tracking-wider">Target Node Missing: {decodeURIComponent(resolvedParams.slug)}</p>
         <Link href="/" className="text-xs text-sky-400 border border-sky-500/20 bg-sky-500/5 px-4 py-2 rounded-xl hover:bg-sky-500/10 transition-colors">
           Return To Secure Terminal
         </Link>
@@ -61,7 +70,7 @@ export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white pt-32 pb-20 px-4 select-none">
+    <main className="min-h-screen bg-zinc-950 text-white pt-32 pb-20 px-4">
       <div className="max-w-3xl mx-auto space-y-8">
         
         {/* BACK ACTION */}
@@ -72,18 +81,23 @@ export default function DynamicBlogViewer({ params }: { params: Promise<{ slug: 
         {/* POST HEADER METADATA */}
         <div className="space-y-4 border-b border-zinc-900 pb-6">
           <div className="flex items-center gap-3 text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
-            <span className="flex items-center gap-1"><Calendar className="w-3 h-3 text-zinc-600" /> {new Date(blog.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+            <span className="flex items-center gap-1">
+              <Calendar className="w-3 h-3 text-zinc-600" /> 
+              {new Date(blog.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            </span>
             <span>•</span>
-            <span className="flex items-center gap-1"><Clock className="w-3 h-3 text-zinc-600" /> 4 Min Read</span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3 h-3 text-zinc-600" /> 3 Min Read
+            </span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-100 leading-tight">
             {blog.title}
           </h1>
         </div>
 
-        {/* RENDERED ARTICLE INJECTOR SECTION */}
-        <article className="font-sans text-sm text-zinc-300 leading-relaxed space-y-6 whitespace-pre-wrap selection:bg-sky-500/20">
-          {blog.content}
+        {/* RENDERED ARTICLE INJECTOR SECTION WITH MARKDOWN SUPPORT */}
+        <article className="font-sans text-sm text-zinc-300 leading-relaxed space-y-4 selection:bg-sky-500/20 prose prose-invert max-w-none">
+          <Markdown>{blog.content}</Markdown>
         </article>
 
         {/* GLOBAL NOTICE BANNER FOR ADSENSE BOT */}
